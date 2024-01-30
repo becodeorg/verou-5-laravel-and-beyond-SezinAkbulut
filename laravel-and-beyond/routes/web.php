@@ -23,30 +23,25 @@ Route::get('/', [ProductController::class, 'index'])->name('show.home');
 
 //CRUD PRODUCTS
 // Create
-Route::get('/form/create', [ProductController::class, 'create'])->name('form.create');
-
-// Show Form
-//Route::get('/form/{id}', [FormController::class, 'show'])->name('form');
-// Submit Form
-Route::post('/form/store', [ProductController::class, 'store'])->name('form.store');
+Route::get('/product/create', [ProductController::class, 'create'])->name('create');
+// Store
+Route::post('/product/store', [ProductController::class, 'store'])->name('store');
 // Edit
-Route::get('/form/{id}/edit', [ProductController::class, 'edit'])->name('form.edit');
+Route::get('/product/{id}/edit', [ProductController::class, 'edit'])->name('edit');
 // Update
-Route::put('/form/{id}', [ProductController::class, 'update'])->name('form.update');
+Route::put('/product/{id}', [ProductController::class, 'update'])->name('update');
 // Delete
-Route::delete('/form/{id}', [ProductController::class, 'destroy'])->name('form.destroy');
+Route::delete('/product/{id}', [ProductController::class, 'destroy'])->name('destroy');
 //Search
 Route::get('/search', [ProductController::class, 'search'])->name('search');
 //Show Details
-Route::get('/movie/{id}', [ProductController::class, 'showDetails'])->name('details');
+Route::get('/product/{id}', [ProductController::class, 'showDetails'])->name('details');
 
 
 //REGISTER
 Route::get("users", [UserController::class, 'index'])->name("showUsers");
 Route::get("users/{id}", [UserController::class, 'show'])->name("showUser");
 
-//Route::get("posts", [PostController::class, 'index'])->name("showPosts");
-//Route::get("posts/{id}", [PostController::class, 'show'])->name("showPost");
-
+//USER
 Route::get("/register", [RegisterController::class, 'index'])->name("showRegister");
 Route::post("/register", [RegisterController::class, 'create'])->name("handleRegister");
