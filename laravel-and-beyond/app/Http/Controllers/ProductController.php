@@ -66,8 +66,8 @@ class ProductController extends Controller
      */
     public function edit($id)
     {
-        $movie = Product::findOrFail($id);
-        $movies = Product::all();
+        $product = Product::findOrFail($id);
+        $products = Product::all();
 
         return view('crud.edit', compact('product', 'products'));
     }
@@ -148,7 +148,7 @@ class ProductController extends Controller
     {
         $product = Product::find($id);
 
-        return view('details', ['product' => $product]);
+        return view('details.details', ['product' => $product]);
     }
 
 }
