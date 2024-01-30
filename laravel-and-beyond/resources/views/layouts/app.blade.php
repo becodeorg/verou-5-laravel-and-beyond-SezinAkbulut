@@ -11,7 +11,7 @@
 <!--Laravel Mix JS-->
 <script src="{{ mix('js/app.js') }}"></script>
 <!--Laravel Mix SASS-->
-<link rel="stylesheet" href="{{ mix('css/app.scss') }}">
+<link rel="stylesheet" href="{{ mix('css/app.css') }}">
     <!--Tailwind-->
     <script src="https://cdn.tailwindcss.com"></script>
 
@@ -21,14 +21,15 @@
     @include('partials.header')
 </header>
 
-<div class="container">
+<div class="container mx-auto mt-8">
     @yield('content')
 </div>
 
-<footer>
+<footer class="text-center mb-5">
     @include('partials.footer')
 </footer>
 
 </body>
+
 </html>
 
