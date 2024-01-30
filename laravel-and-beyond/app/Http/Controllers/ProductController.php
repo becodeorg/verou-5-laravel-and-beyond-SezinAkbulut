@@ -31,25 +31,31 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
+        //dd('Store method is called.');
+       // dd($request->all());
+
         $validatedData = $request->validate([
             'title' => 'required',
             'price' => 'required',
             'photo' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);
+        //dd($validatedData);
 
         $product = new Product;
         $product->title = $validatedData['title'];
         $product->price = $validatedData['price'];
 
         // Store the image in the storage disk (public)
-        $posterPath = Storage::disk('public')->put('photos', $request->file('photos'));
+        $posterPath = Storage::disk('public')->put('photos', $request->file('photo'));
         // $posterPath = $request->file('photos')->store('photos');
+       // dd($posterPath);
 
         // Update the image path in the database
         $product->photo = $posterPath;
 
         // Save other fields
         $product->save();
+       // dd($product);
 
         return redirect()->route('show.home')->with('success', 'Product created successfully!');
     }
