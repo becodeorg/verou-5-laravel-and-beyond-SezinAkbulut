@@ -122,10 +122,10 @@ class ProductController extends Controller
         $product->delete();
 
         // Check if there are deleted product in the session
-        $deletedMovies = session('deletedProduct', []);
+        $deletedProducts = session('deletedProduct', []);
 
         // Add the deleted product to the list
-        $deletedProducts[$id] = $deletedProduct;
+        $deletedProducts[$id] = $deletedProducts;
 
         // Update the movies and deleted movies in the session
         session(['deletedProducts' => $deletedProducts]);
