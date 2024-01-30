@@ -16,7 +16,6 @@
             <input type="search" name="query" placeholder="Search..." class="form-input rounded-l-md border border-gray-200 py-1 px-2">
             <button type="submit" class="bg-orange-500 text-white rounded-r-md py-1 px-2">Search</button>
         </form>
-
     </div>
 </nav>
 

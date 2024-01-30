@@ -10,9 +10,9 @@
     @endif
 
     <div class="container text-center">
-        <h1 class="mt-4 font-bold text-info text-4xl">Let's Dive in <br> <span>Music</span> World</h1>
 
-        <a href="{{ route('create') }}" class="btn btn-dark mt-3">Add New</a>
+        <a href="{{ route('create') }}" class="bg-orange-500 text-white rounded-md py-2 px-4 mt-3 inline-block">Add New</a>
+
 
         <!-- Display movies -->
         @if ($products->count() > 0)
