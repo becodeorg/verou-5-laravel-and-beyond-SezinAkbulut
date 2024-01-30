@@ -40,12 +40,12 @@
                 @endforeach
             </div>
         @else
-            <p class="mt-4">No movies found.</p>
+            <p class="mt-4">No products found.</p>
         @endif
 
-        {{-- Dump movies for debugging
+        {{-- Dump products for debugging
         <div class="mt-4">
-            @dump($movies)
+            @dump($products)
         </div>
         --}}
     </div>

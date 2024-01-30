@@ -140,7 +140,7 @@ class ProductController extends Controller
         $query = $request->input('query');
         $products = Product::where('title', 'like', "%$query%")->get();
 
-        return view('search', ['movies' => $products, 'query' => $query]);
+        return view('search.search', ['products' => $products, 'query' => $query]);
     }
 
     //Show details
