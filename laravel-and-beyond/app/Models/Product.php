@@ -16,8 +16,14 @@ class Product extends Model
     protected $primaryKey = 'id';
 
     // Define the fillable attributes for the model
-    protected $fillable = ['photo', 'title', 'price'];
+    protected $fillable = ['title', 'price', 'photo', 'popular_trend'];
 
+    // Other model code...
+
+    public function getIsPopularTrendAttribute()
+    {
+        return $this->attributes['popular_trend'];
+    }
 
     // Timestamps
     public $timestamps = true;

@@ -14,6 +14,8 @@
 <link rel="stylesheet" href="{{ mix('css/app.css') }}">
     <!--Tailwind-->
     <script src="https://cdn.tailwindcss.com"></script>
+    <!--Font Awesome-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
 
 </head>
 <body>
@@ -30,6 +32,21 @@
 </footer>
 
 </body>
+<style>
+body{
+    background-color: black;
+}
+   header {
+       background-image: url('{{ asset("images/new-bg.png") }}');
+       background-size: cover;
+       background-repeat: no-repeat;
+       background-position: center;
+       height: 100vh;
+       margin: 0;
+   }
+
+</style>
+
 
 </html>
 

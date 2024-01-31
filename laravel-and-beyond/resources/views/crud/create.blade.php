@@ -3,6 +3,13 @@
 @section('title', 'Create New Product')
 
 @section('content')
+    <br><br>
+    <br><br>
+    <br><br>
+    <br><br>
+    <br><br>
+    <br><br>
+    <br><br>
     <title>{{env("APP_NAME") . "E-Commerce Project"}}</title>
     <h1 class="text-3xl font-bold text-center mt-8 mb-6 text-orange-500">Create A New Product</h1>
 

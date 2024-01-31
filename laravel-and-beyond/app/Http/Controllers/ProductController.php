@@ -14,9 +14,12 @@ class ProductController extends Controller
      */
     public function index()
     {
-        //
-        $products = Product::all();
-        return view('show.home', compact('products'));
+        $products = Product::all();  // Or however you fetch your products
+
+        // Filter popular trend products
+        $popularTrendProducts = $products->where('popular_trend', true);
+
+        return view('show.home', compact('products', 'popularTrendProducts'));
     }
     /**
      * Show the form for creating a new resource.

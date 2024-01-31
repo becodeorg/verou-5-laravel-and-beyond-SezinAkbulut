@@ -2,6 +2,9 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\HeadphonesController;
+use App\Http\Controllers\SmartwatchController;
+use App\Http\Controllers\SmartphoneController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\UserController;
 
@@ -24,6 +27,7 @@ Route::get('/', [ProductController::class, 'index'])->name('show.home');
 //CRUD PRODUCTS
 // Create
 Route::get('/product/create', [ProductController::class, 'create'])->name('create');
+
 // Store
 Route::post('/product/store', [ProductController::class, 'store'])->name('store');
 // Edit
@@ -37,6 +41,11 @@ Route::get('/search', [ProductController::class, 'search'])->name('search');
 //Show Details
 Route::get('/product/{id}', [ProductController::class, 'showDetails'])->name('details');
 
+
+//CATEGORIES
+Route::get('/headphones', [HeadphonesController::class, 'headphones'])->name('headphones');
+Route::get('/smartwatch', [SmartwatchController::class, 'smartwatch'])->name('smartwatch');
+Route::get('/smartphone', [SmartphoneController::class, 'smartphone'])->name('smartphone');
 
 //REGISTER
 Route::get("users", [UserController::class, 'index'])->name("showUsers");

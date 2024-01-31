@@ -3,6 +3,13 @@
 @section('title', 'Update')
 
 @section('content')
+    <br><br>
+    <br><br>
+    <br><br>
+    <br><br>
+    <br><br>
+    <br><br>
+    <br><br>
 
     <div class="container mt-3">
         <h1 class="text-3xl font-bold text-center mt-8 mb-6 text-orange-500">Update</h1>
