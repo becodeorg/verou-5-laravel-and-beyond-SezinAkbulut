@@ -21,8 +21,8 @@
                         <br>
 
                         <div class=" card object-top glass-effect mx-auto">
-                            <a href="{{ route('details', ['id' => $product->id]) }}">
-                         {{--}} <!--  <a href="{{ $product->id == 1 ? route('headphones') : ($product->id == 2 ? route('smartwatch') : ($product->id == 3 ? route('smartphone') : route('details', ['id' => $product->id]))) }}">--> --}}
+                            {{--  <a href="{{ route('details', ['id' => $product->id]) }}">--}}
+                           <a href="{{ $product->id == 1 ? route('headphones.headphones') : ($product->id == 2 ? route('smartwatchs.smartwatchs') : ($product->id == 3 ? route('smartphones.smartphones') : route('details', ['id' => $product->id]))) }}">
 
                                 <img src="{{ asset('storage/' . $product->photo) }}" class="card-img-top custom-thumbnail mx-auto mt-4" alt="{{ $product->title }}">
                             </a>

@@ -7,5 +7,5 @@ use Illuminate\Database\Eloquent\Model;
 
 class Headphones extends Model
 {
-    use HasFactory;
+    // Additional attributes or methods specific to headphones
 }

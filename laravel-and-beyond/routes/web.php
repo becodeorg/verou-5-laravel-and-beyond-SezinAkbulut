@@ -43,9 +43,12 @@ Route::get('/product/{id}', [ProductController::class, 'showDetails'])->name('de
 
 
 //CATEGORIES
-Route::get('/headphones', [HeadphonesController::class, 'headphones'])->name('headphones');
-Route::get('/smartwatch', [SmartwatchController::class, 'smartwatch'])->name('smartwatch');
-Route::get('/smartphone', [SmartphoneController::class, 'smartphone'])->name('smartphone');
+
+Route::get('/headphones', [HeadphonesController::class, 'index'])->name('headphones.headphones');
+Route::get('/headphones/{id}', [HeadphonesController::class, 'show'])->name('headphones.show');
+
+Route::get('/smartwatch', [SmartwatchController::class, 'smartwatch'])->name('smartwatchs.smartwatchs');
+Route::get('/smartphone', [SmartphoneController::class, 'smartphone'])->name('smartphones.smartphones');
 
 //REGISTER
 Route::get("users", [UserController::class, 'index'])->name("showUsers");

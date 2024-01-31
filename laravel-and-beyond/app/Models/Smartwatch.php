@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Smartwatch extends Model
+class Smartwatch extends Product
 {
     use HasFactory;
 }
