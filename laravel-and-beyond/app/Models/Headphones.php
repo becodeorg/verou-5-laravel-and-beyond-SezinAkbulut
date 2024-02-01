@@ -7,5 +7,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class Headphones extends Model
 {
-    // Additional attributes or methods specific to headphones
+    use HasFactory;
+
+    protected $fillable = ['title', 'description', 'price', 'photo'];
 }
+

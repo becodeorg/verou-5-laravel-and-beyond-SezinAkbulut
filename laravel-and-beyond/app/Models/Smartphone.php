@@ -8,4 +8,6 @@ use Illuminate\Database\Eloquent\Model;
 class Smartphone extends Model
 {
     use HasFactory;
+
+    protected $fillable = ['title', 'description', 'price', 'photo'];
 }

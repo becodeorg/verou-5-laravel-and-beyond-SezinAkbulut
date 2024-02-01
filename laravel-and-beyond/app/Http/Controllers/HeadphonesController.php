@@ -3,6 +3,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Headphones;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class HeadphonesController extends Controller
 {
@@ -16,7 +17,7 @@ class HeadphonesController extends Controller
     {
         $headphone = Headphones::find($id);
 
-        return view('headphones.show', ['headphone' => $headphone]);
+        return view('categories.headphones.show', ['headphone' => $headphone]);
     }
 
 
@@ -28,33 +29,28 @@ class HeadphonesController extends Controller
 
     public function store(Request $request)
     {
-        //dd('Store method is called.');
-        // dd($request->all());
-
         $validatedData = $request->validate([
             'title' => 'required',
+            'description' => 'required',
             'price' => 'required',
             'photo' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);
-        //dd($validatedData);
 
-        $headphone = new Headphone;
+        $headphone = new Headphones;
         $headphone->title = $validatedData['title'];
+        $headphone->description = $validatedData['description']; // Add this line for the description field
         $headphone->price = $validatedData['price'];
 
         // Store the image in the storage disk (public)
         $posterPath = Storage::disk('public')->put('photos', $request->file('photo'));
-        // $posterPath = $request->file('photos')->store('photos');
-        // dd($posterPath);
 
         // Update the image path in the database
         $headphone->photo = $posterPath;
 
         // Save other fields
         $headphone->save();
-        // dd($product);
 
-        return redirect()->route('show.home')->with('success', 'Product created successfully!');
+        return redirect()->route('headphones.headphones')->with('success', 'Product created successfully!');
     }
 
     //edit and update
@@ -71,38 +67,43 @@ class HeadphonesController extends Controller
         // Validation
         $request->validate([
             'title' => 'required|string|max:255',
-            'price' => 'required|string',
+            'description' => 'required|string', // Add description validation if necessary
+            'price' => 'required|numeric',
             'photo' => 'image|mimes:jpeg,png,jpg,gif|max:2048',
         ]);
 
         $headphone = Headphones::findOrFail($id);
 
+        // Handle photo update
+        if ($request->hasFile('photo')) {
+            // Check if the headphone has a photo
+            if ($headphone->photo) {
+                // Delete old photo
+                Storage::disk('public')->delete($headphone->photo);
+            }
+
+            // Store the new photo in the storage disk
+            $posterPath = Storage::disk('public')->put('photos', $request->file('photo'));
+
+            // Update the photo path in the database
+            $headphone->photo = $posterPath;
+        }
+
+        // Update other fields
         $headphone->update([
             'title' => $request->input('title'),
+            'description' => $request->input('description'),
             'price' => $request->input('price'),
         ]);
 
-        // Handle photo update
-        if ($request->hasFile('photo')) {
-            // Delete old poster
-            Storage::disk('public')->delete($headphone->photo);
-
-            // Store the new photo in the storage disk
-            $posterPath = Storage::disk('public')->put('photo', $request->file('photo'));
-
-            // Update the poster path in the database
-            $headphone->photo = $posterPath;
-            $headphone->save();
-        }
-
-        return redirect()->route('show.home')->with('success', 'Product updated successfully!');
+        return redirect()->route('headphones.headphones')->with('success', 'Product updated successfully!');
     }
 
     //delete
 
     public function destroy($id)
     {
-        $headphone = Headphone::findOrFail($id);
+        $headphone = Headphones::findOrFail($id);
 
         // Retrieve the deleted product for display on the home page
         $deletedHeadphone = $headphone->toArray();
@@ -120,7 +121,7 @@ class HeadphonesController extends Controller
         session(['deletedHeadphones' => $deletedHeadphones]);
 
         // Redirect to home page with success message
-        return redirect()->route('show.home')->with('success', 'Products deleted successfully!');
+        return redirect()->route('headphones.headphones')->with('success', 'Products deleted successfully!');
     }
 
 }

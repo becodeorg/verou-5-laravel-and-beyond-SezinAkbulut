@@ -23,7 +23,7 @@
                     @if($headphone->photo)
                         <div class="text-center">
                             <label for="currentPhoto"></label>
-                            <img src="{{ asset('storage/' . $headphone->photo) }}" class="card-img-top custom-thumbnail" alt="{{ $product->title }}">
+                            <img src="{{ asset('storage/' . $headphone->photo) }}" class="card-img-top custom-thumbnail" alt="{{ $headphone->title }}">
                         </div>
                     @endif
                 </div>
@@ -40,6 +40,11 @@
                     <div class="mb-4">
                         <label for="title" class="block text-gray-700 text-sm font-bold mb-2">Title:</label>
                         <input type="text" class="form-input border w-full p-2" name="title" id="title" value="{{ old('title', $headphone->title) }}" required>
+                    </div>
+
+                    <div class="mb-4">
+                        <label for="description" class="block text-gray-700 text-sm font-bold mb-2">Title:</label>
+                        <input type="text" class="form-input border w-full p-2" name="description" id="description" value="{{ old('title', $headphone->description) }}" required>
                     </div>
 
                     <div class="mb-4">

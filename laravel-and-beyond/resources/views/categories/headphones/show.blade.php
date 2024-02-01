@@ -14,10 +14,10 @@
         <h1 class="text-3xl font-bold text-center mt-8 mb-6 text-orange-500">Product Details</h1>
         <br><br>
         @if($headphone)
-            <div class="card bg-dark mb-3 mx-auto max-w-sm">
+            <div class="card bg-dark mb-3 mx-auto max-w-sm text-white">
                 <img src="{{ asset('storage/' . $headphone->photo) }}" class="card-img-top custom-thumbnail mx-auto mt-4" alt="{{ $headphone->title }}">
-                <div class="card-body">
-                    <h5 class="card-title text-3xl mt-2 text-light">{{ $headphone->title }}</h5>
+                <div class="card-body text-white">
+                    <h5 class="card-title  text-white text-3xl mt-2 text-light">{{ $headphone->title }}</h5>
                     <p class="card-text text-light">{{ $headphone->price }}</p>
                     <br>
                     <a href="{{ route('edit_headphones', ['id' => $headphone->id]) }}" class="bg-yellow-500 text-white py-2 px-4 rounded-md">Update</a>
@@ -30,7 +30,7 @@
                 </div>
             </div>
         @else
-            <p>Product not found.</p>
+            <p class="text-white" >Product not found.</p>
         @endif
     </div>
     <br><br>

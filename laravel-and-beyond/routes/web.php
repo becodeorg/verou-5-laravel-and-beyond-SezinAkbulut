@@ -47,16 +47,16 @@ Route::get('/product/{id}', [ProductController::class, 'showDetails'])->name('de
 //HEADPHONES
 
 Route::get('/headphones', [HeadphonesController::class, 'index'])->name('headphones.headphones');
-//Show details
-Route::get('/headphones/{id}', [HeadphonesController::class, 'show'])->name('headphones.show');
 // Create
 Route::get('/headphones/create', [HeadphonesController::class, 'create'])->name('create_headphones');
 // Store
 Route::post('/headphones/store', [HeadphonesController::class, 'store'])->name('store_headphones');
+//Show details
+Route::get('/headphones/{id}', [HeadphonesController::class, 'show'])->name('headphones.show');
 // Edit
 Route::get('/headphones/{id}/edit', [HeadphonesController::class, 'edit'])->name('edit_headphones');
 // Update
-Route::put('/headphones/{id}', [HeadphonesController::class, 'update'])->name('update_headphones');
+Route::put('/headphones/update/{id}', [HeadphonesController::class, 'update'])->name('update.headphones');
 // Delete
 Route::delete('/headphones/{id}', [HeadphonesController::class, 'destroy'])->name('destroy_headphones');
 
