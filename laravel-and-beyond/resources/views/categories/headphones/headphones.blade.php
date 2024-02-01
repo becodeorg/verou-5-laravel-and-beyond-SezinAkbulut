@@ -6,7 +6,9 @@
     <br>
     <br><br>
     <br><br><br><br><br><br><br><br><br>
-
+    <a href="{{ route('create_headphones') }}" class="bg-orange-500 text-white rounded-md py-2 px-4 top-52 mt-48 ml-28 inline-block float-left absolute">
+        Add new product
+    </a>
     @foreach($headphones as $headphone)
         <div>
             <h2 class="text-white">{{ $headphone->title }}</h2>

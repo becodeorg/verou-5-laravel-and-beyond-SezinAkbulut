@@ -44,15 +44,52 @@ Route::get('/product/{id}', [ProductController::class, 'showDetails'])->name('de
 
 //CATEGORIES
 
+//HEADPHONES
+
 Route::get('/headphones', [HeadphonesController::class, 'index'])->name('headphones.headphones');
+//Show details
 Route::get('/headphones/{id}', [HeadphonesController::class, 'show'])->name('headphones.show');
+// Create
+Route::get('/headphones/create', [HeadphonesController::class, 'create'])->name('create_headphones');
+// Store
+Route::post('/headphones/store', [HeadphonesController::class, 'store'])->name('store_headphones');
+// Edit
+Route::get('/headphones/{id}/edit', [HeadphonesController::class, 'edit'])->name('edit_headphones');
+// Update
+Route::put('/headphones/{id}', [HeadphonesController::class, 'update'])->name('update_headphones');
+// Delete
+Route::delete('/headphones/{id}', [HeadphonesController::class, 'destroy'])->name('destroy_headphones');
 
-Route::get('/smartwatch', [SmartwatchController::class, 'index'])->name('smartwatchs.smartwatchs');
-Route::get('/smartwatch/{id}', [SmartphoneController::class, 'show'])->name('smartwatchs.show');
+//SMARTWATCHES
 
+Route::get('/smartwatches', [SmartwatchController::class, 'index'])->name('smartwatchs.smartwatchs');
+//Show details
+Route::get('/smartwatches/{id}', [SmartwatchController::class, 'show'])->name('smartwatchs.show');
+// Create
+Route::get('/smartwatches/create', [SmartwatchController::class, 'create'])->name('create_smartwatchs');
+// Store
+Route::post('/smartwatches/store', [SmartwatchController::class, 'store'])->name('store_smartwatchs');
+// Edit
+Route::get('/smartwatches/{id}/edit', [SmartwatchController::class, 'edit'])->name('edit_smartwatchs');
+// Update
+Route::put('/smartwatches/{id}', [SmartwatchController::class, 'update'])->name('update_smartwatchs');
+// Delete
+Route::delete('/smartwatches/{id}', [SmartwatchController::class, 'destroy'])->name('destroy_smartwatchs');
 
-Route::get('/smartphone', [SmartphoneController::class, 'index'])->name('smartphones.smartphones');
-Route::get('/smartphone/{id}', [SmartphoneController::class, 'show'])->name('smartphones.show');
+//SMARTPHONES
+Route::get('/smartphones', [SmartphoneController::class, 'index'])->name('smartphones.smartphones');
+//Show details
+Route::get('/smartphones/{id}', [SmartphoneController::class, 'show'])->name('smartphones.show');
+// Create
+Route::get('/smartphones/create', [SmartphoneController::class, 'create'])->name('create_smartphones');
+// Store
+Route::post('/smartphones/store', [SmartphoneController::class, 'store'])->name('store_smartphones');
+// Edit
+Route::get('/smartphones/{id}/edit', [SmartphoneController::class, 'edit'])->name('edit_smartphones');
+// Update
+Route::put('/smartphones/{id}', [SmartphoneController::class, 'update'])->name('update_smartphones');
+// Delete
+Route::delete('/smartphones/{id}', [SmartphoneController::class, 'destroy'])->name('destroy_smartphones');
 
 //REGISTER
 Route::get("users", [UserController::class, 'index'])->name("showUsers");
