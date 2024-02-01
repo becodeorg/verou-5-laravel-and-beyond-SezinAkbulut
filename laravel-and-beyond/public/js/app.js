@@ -5362,6 +5362,14 @@ module.exports = axios;
 /***/ ((__unused_webpack_module, __unused_webpack_exports, __webpack_require__) => {
 
 __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
+document.addEventListener('DOMContentLoaded', function () {
+  var toggleButton = document.getElementById('toggle-mode');
+  var body = document.body;
+  toggleButton.addEventListener('click', function () {
+    body.classList.toggle('light-mode');
+    body.classList.toggle('dark-mode');
+  });
+});
 
 /***/ }),
 

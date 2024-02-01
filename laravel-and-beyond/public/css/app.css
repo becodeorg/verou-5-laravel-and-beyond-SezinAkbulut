@@ -492,4 +492,12 @@ video {
 
 
 
+.dark-mode {
+  background-color: #1a202c;
+  color: #cbd5e0;
+}
 
+.light-mode {
+  background-color: #ffffff;
+  color: #1a202c;
+}

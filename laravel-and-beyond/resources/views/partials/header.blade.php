@@ -7,6 +7,8 @@
         <nav class="p-4 w-full absolute top-2 left-0 z-10">
             <div class="flex items-center justify-between w-full">
                 <ul class="flex text-white font-medium space-x-4 ml-5">
+                    <a href="{{ route('show.home') }}" class="text-lg font-semibold">Your Logo</a>
+
                     <li>
                         <a href="{{ route('show.home') }}" >Home</a>
                     </li>
@@ -17,6 +19,11 @@
 
                         <a href="{{ route('showRegister') }}" >Register</a>
                     </li>
+
+
+                    <button id="toggle-mode" class="text-sm px-3 py-1 border rounded focus:outline-none">
+                        Toggle Mode
+                    </button>
                 </ul>
                 <form action="{{ route('search') }}" method="GET" class="flex items-center">
                     <input type="search" name="query" placeholder="Search..." class="form-input rounded-l-md border border-gray-200 py-1 px-2">

@@ -1,3 +1,12 @@
 @import 'tailwind.css';
+.dark-mode {
+  background-color: #000000;
+  color: #cbd5e0;
+}
+
+.light-mode {
+  background-color: #ffffff;
+  color: #1a202c;
+}
 
 /*# sourceMappingURL=app.css.map */

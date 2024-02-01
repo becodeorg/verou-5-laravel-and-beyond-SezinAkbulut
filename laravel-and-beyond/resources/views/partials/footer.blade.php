@@ -45,11 +45,11 @@
             <!-- Contact Us -->
             <div>
                 <h3 class="text-lg font-semibold mb-3">Contact Us</h3>
-                <p>1800-102-0525</p>
+                <p> sezin.akbulut@gmail.com</p>
                 <p>Mon-Sun: 10AM-7PM</p>
                 <p>Manufactured by:</p>
-                <p>Harman International Industries, Inc.</p>
-                <p>8500, Balboa Blvd, Northridge, CA 91329, USA</p>
+                <p>Sezin Akbulut</p>
+                <p>Belgium</p>
             </div>
         </div>
 

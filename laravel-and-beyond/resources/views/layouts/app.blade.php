@@ -18,7 +18,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
 
 </head>
-<body>
+<body class="dark-mode">
 <header>
     @include('partials.header')
 </header>
@@ -34,9 +34,7 @@
 
 </body>
 <style>
-body{
-    background-color: black;
-}
+
    header {
        background-image: url('{{ asset("images/new-bg.png") }}');
        background-size: cover;
