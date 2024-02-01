@@ -1,6 +1,6 @@
 <!--Header image-->
 <div class="relative flex justify-end">
-    <img src="{{ asset('images/new-bg.png') }}" alt="Header Image" class="h-full right-0" z-10>
+   <img src="{{ asset('images/day-header.png') }}" alt="Header Image" id="header-image" class="h-full right-0" z-10>
 
     <div class="header-content absolute p-4 text-left text-black font-proxima-nova w-full">
         <!-- nav bar -->

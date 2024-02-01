@@ -5365,9 +5365,14 @@ __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
 document.addEventListener('DOMContentLoaded', function () {
   var toggleButton = document.getElementById('toggle-mode');
   var body = document.body;
+  var headerImage = document.getElementById('header-image');
   toggleButton.addEventListener('click', function () {
     body.classList.toggle('light-mode');
     body.classList.toggle('dark-mode');
+
+    // Update header image source based on the selected mode
+    var currentMode = body.classList.contains('light-mode') ? 'day' : 'night';
+    headerImage.src = "{{ asset(\"images/".concat(currentMode, "-header.jpg\") }}");
   });
 });
 
