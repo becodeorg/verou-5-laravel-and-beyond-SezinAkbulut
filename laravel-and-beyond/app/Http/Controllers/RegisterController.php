@@ -19,7 +19,7 @@ class RegisterController extends Controller
         // Validate the form data
         $validatedData = $request->validate([
             'name' => 'required|string|max:255',
-            'password' => 'required|string|min:6',
+            'password' => 'required|confirmed|string|min:6',
         ]);
 
         // Create a new user
