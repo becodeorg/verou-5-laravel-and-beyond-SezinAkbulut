@@ -14,6 +14,10 @@
             <p class="text-white">Price: ${{ $headphone->price }}</p>
         </div>
     @endforeach
+
+    <div class="text-center mt-4">
+        <button class="bg-gray-800 text-white py-2 px-4 rounded-md" onclick="window.location.href='{{ route('show.home') }}'">Back</button>
+    </div>
 @endsection
 
 
