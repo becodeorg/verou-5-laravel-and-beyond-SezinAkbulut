@@ -26,10 +26,11 @@
 <div class="container mx-auto mt-8">
     @yield('content')
 </div>
-
-<footer class="text-center mb-5">
+<br><br>
+<footer class="text-center mb-5 bg-purple-950 text-white p-6">
     @include('partials.footer')
 </footer>
+
 
 </body>
 <style>
