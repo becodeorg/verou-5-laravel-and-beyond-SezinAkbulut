@@ -14,7 +14,7 @@
     <div class="container mt-3">
         <h1 class="text-3xl font-bold text-center mt-8 mb-6 text-orange-500">Update</h1>
 
-        <form action="{{ route('update.smartphones', ['id' => $headphone->id]) }}" method="post" enctype="multipart/form-data" class="max-w-md mx-auto border border-gray-300 p-6 rounded-md">
+        <form action="{{ route('update_smartphones', ['id' => $smartphone->id]) }}" method="post" enctype="multipart/form-data" class="max-w-md mx-auto border border-gray-300 p-6 rounded-md">
             @csrf
             @method('PUT')
 
@@ -43,6 +43,11 @@
                     </div>
 
                     <div class="mb-4">
+                        <label for="description" class="block text-gray-700 text-sm font-bold mb-2">Title:</label>
+                        <input type="text" class="form-input border w-full p-2" name="description" id="description" value="{{ old('title', $smartphone->description) }}" required>
+                    </div>
+
+                    <div class="mb-4">
                         <label for="price" class="block text-gray-700 text-sm font-bold mb-2">Price:</label>
                         <textarea class="form-input border w-full p-2" name="price" id="price" required>{{ old('price', $smartphone->price) }}</textarea>
                     </div>
@@ -58,7 +63,7 @@
     </div>
 
     <div class="text-center mt-4">
-        <button class="bg-gray-800 text-white py-2 px-4 rounded-md" onclick="window.location.href='{{ route('show.home') }}'">Back</button>
+        <button class="bg-gray-800 text-white py-2 px-4 rounded-md" onclick="window.location.href='{{ route('smartphones.smartphones') }}'">Back</button>
     </div>
 
 @endsection

@@ -15,9 +15,10 @@
         <br><br>
         @if($smartwatch)
             <div class="card bg-dark mb-3 mx-auto max-w-sm">
-                <img src="{{ asset('storage/' . $smartwatch->photo) }}" class="card-img-top custom-thumbnail mx-auto mt-4" alt="{{ $headphone->title }}">
-                <div class="card-body">
+                <img src="{{ asset('storage/' . $smartwatch->photo) }}" class="card-img-top custom-thumbnail mx-auto mt-4" alt="{{ $smartwatch->title }}">
+                <div class="card-body text-white">
                     <h5 class="card-title text-3xl mt-2 text-light">{{ $smartwatch->title }}</h5>
+                    <p class="card-text text-light">{{ $smartwatch->description }}</p>
                     <p class="card-text text-light">{{ $smartwatch->price }}</p>
                     <br>
                     <a href="{{ route('edit_smartwatchs', ['id' => $smartwatch->id]) }}" class="bg-yellow-500 text-white py-2 px-4 rounded-md">Update</a>
@@ -35,7 +36,7 @@
     </div>
     <br><br>
     <div class="text-center mt-4">
-        <button class="bg-gray-800 text-white py-2 px-4 rounded-md" onclick="window.location.href='{{ route('show.home') }}'">Back</button>
+        <button class="bg-gray-800 text-white py-2 px-4 rounded-md" onclick="window.location.href='{{ route('smartwatchs.smartwatchs') }}'">Back</button>
     </div>
 @endsection
 

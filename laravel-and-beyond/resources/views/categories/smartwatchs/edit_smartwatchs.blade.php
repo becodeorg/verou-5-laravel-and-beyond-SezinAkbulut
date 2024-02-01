@@ -14,7 +14,7 @@
     <div class="container mt-3">
         <h1 class="text-3xl font-bold text-center mt-8 mb-6 text-orange-500">Update</h1>
 
-        <form action="{{ route('update.smartwatchs', ['id' => $smartwatch->id]) }}" method="post" enctype="multipart/form-data" class="max-w-md mx-auto border border-gray-300 p-6 rounded-md">
+        <form action="{{ route('update_smartwatchs', ['id' => $smartwatch->id]) }}" method="post" enctype="multipart/form-data" class="max-w-md mx-auto border border-gray-300 p-6 rounded-md">
             @csrf
             @method('PUT')
 
@@ -37,9 +37,15 @@
                         <input type="file" name="photo" class="form-input border w-full p-2">
                     </div>
 
+
                     <div class="mb-4">
                         <label for="title" class="block text-gray-700 text-sm font-bold mb-2">Title:</label>
                         <input type="text" class="form-input border w-full p-2" name="title" id="title" value="{{ old('title', $smartwatch->title) }}" required>
+                    </div>
+
+                    <div class="mb-4">
+                        <label for="description" class="block text-gray-700 text-sm font-bold mb-2">Description:</label>
+                        <input type="text" class="form-input border w-full p-2" name="description" id="description" value="{{ old('title', $smartwatch->description) }}" required>
                     </div>
 
                     <div class="mb-4">
@@ -58,7 +64,7 @@
     </div>
 
     <div class="text-center mt-4">
-        <button class="bg-gray-800 text-white py-2 px-4 rounded-md" onclick="window.location.href='{{ route('show.home') }}'">Back</button>
+        <button class="bg-gray-800 text-white py-2 px-4 rounded-md" onclick="window.location.href='{{ route('smartwatchs.smartwatchs') }}'">Back</button>
     </div>
 
 @endsection

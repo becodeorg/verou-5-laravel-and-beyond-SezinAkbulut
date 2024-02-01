@@ -63,31 +63,31 @@ Route::delete('/headphones/{id}', [HeadphonesController::class, 'destroy'])->nam
 //SMARTWATCHES
 
 Route::get('/smartwatches', [SmartwatchController::class, 'index'])->name('smartwatchs.smartwatchs');
-//Show details
-Route::get('/smartwatches/{id}', [SmartwatchController::class, 'show'])->name('smartwatchs.show');
 // Create
 Route::get('/smartwatches/create', [SmartwatchController::class, 'create'])->name('create_smartwatchs');
 // Store
 Route::post('/smartwatches/store', [SmartwatchController::class, 'store'])->name('store_smartwatchs');
+//Show details
+Route::get('/smartwatches/{id}', [SmartwatchController::class, 'show'])->name('smartwatchs.show');
 // Edit
 Route::get('/smartwatches/{id}/edit', [SmartwatchController::class, 'edit'])->name('edit_smartwatchs');
 // Update
-Route::put('/smartwatches/{id}', [SmartwatchController::class, 'update'])->name('update_smartwatchs');
+Route::put('/smartwatches/update/{id}', [SmartwatchController::class, 'update'])->name('update_smartwatchs');
 // Delete
 Route::delete('/smartwatches/{id}', [SmartwatchController::class, 'destroy'])->name('destroy_smartwatchs');
 
 //SMARTPHONES
 Route::get('/smartphones', [SmartphoneController::class, 'index'])->name('smartphones.smartphones');
-//Show details
-Route::get('/smartphones/{id}', [SmartphoneController::class, 'show'])->name('smartphones.show');
 // Create
 Route::get('/smartphones/create', [SmartphoneController::class, 'create'])->name('create_smartphones');
 // Store
 Route::post('/smartphones/store', [SmartphoneController::class, 'store'])->name('store_smartphones');
+//Show details
+Route::get('/smartphones/{id}', [SmartphoneController::class, 'show'])->name('smartphones.show');
 // Edit
 Route::get('/smartphones/{id}/edit', [SmartphoneController::class, 'edit'])->name('edit_smartphones');
 // Update
-Route::put('/smartphones/{id}', [SmartphoneController::class, 'update'])->name('update_smartphones');
+Route::put('/smartphones/update/{id}', [SmartphoneController::class, 'update'])->name('update_smartphones');
 // Delete
 Route::delete('/smartphones/{id}', [SmartphoneController::class, 'destroy'])->name('destroy_smartphones');
 

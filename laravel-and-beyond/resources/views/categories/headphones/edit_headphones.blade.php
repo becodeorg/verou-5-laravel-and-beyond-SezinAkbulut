@@ -43,7 +43,7 @@
                     </div>
 
                     <div class="mb-4">
-                        <label for="description" class="block text-gray-700 text-sm font-bold mb-2">Title:</label>
+                        <label for="description" class="block text-gray-700 text-sm font-bold mb-2">Description:</label>
                         <input type="text" class="form-input border w-full p-2" name="description" id="description" value="{{ old('title', $headphone->description) }}" required>
                     </div>
 
@@ -63,7 +63,7 @@
     </div>
 
     <div class="text-center mt-4">
-        <button class="bg-gray-800 text-white py-2 px-4 rounded-md" onclick="window.location.href='{{ route('show.home') }}'">Back</button>
+        <button class="bg-gray-800 text-white py-2 px-4 rounded-md" onclick="window.location.href='{{ route('headphones.headphones') }}'">Back</button>
     </div>
 
 @endsection

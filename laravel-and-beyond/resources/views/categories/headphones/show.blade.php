@@ -18,6 +18,7 @@
                 <img src="{{ asset('storage/' . $headphone->photo) }}" class="card-img-top custom-thumbnail mx-auto mt-4" alt="{{ $headphone->title }}">
                 <div class="card-body text-white">
                     <h5 class="card-title  text-white text-3xl mt-2 text-light">{{ $headphone->title }}</h5>
+                    <p class="card-text text-light">{{ $headphone->description }}</p>
                     <p class="card-text text-light">{{ $headphone->price }}</p>
                     <br>
                     <a href="{{ route('edit_headphones', ['id' => $headphone->id]) }}" class="bg-yellow-500 text-white py-2 px-4 rounded-md">Update</a>
@@ -35,6 +36,6 @@
     </div>
     <br><br>
     <div class="text-center mt-4">
-        <button class="bg-gray-800 text-white py-2 px-4 rounded-md" onclick="window.location.href='{{ route('show.home') }}'">Back</button>
+        <button class="bg-gray-800 text-white py-2 px-4 rounded-md" onclick="window.location.href='{{ route('headphones.headphones') }}'">Back</button>
     </div>
 @endsection

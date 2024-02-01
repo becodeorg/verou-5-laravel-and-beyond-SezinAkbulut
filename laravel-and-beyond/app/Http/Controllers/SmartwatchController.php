@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Smartwatch;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class SmartwatchController extends Controller
 {
@@ -32,6 +34,7 @@ class SmartwatchController extends Controller
 
         $validatedData = $request->validate([
             'title' => 'required',
+            'description' => 'required',
             'price' => 'required',
             'photo' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);
@@ -39,6 +42,7 @@ class SmartwatchController extends Controller
 
         $smartwatch = new Smartwatch;
         $smartwatch->title = $validatedData['title'];
+        $smartwatch->description = $validatedData['description'];
         $smartwatch->price = $validatedData['price'];
 
         // Store the image in the storage disk (public)
@@ -53,7 +57,7 @@ class SmartwatchController extends Controller
         $smartwatch->save();
         // dd($product);
 
-        return redirect()->route('show.home')->with('success', 'Product created successfully!');
+        return redirect()->route('smartwatchs.smartwatchs')->with('success', 'Product created successfully!');
     }
 
     //edit and update
@@ -70,37 +74,40 @@ class SmartwatchController extends Controller
         // Validation
         $request->validate([
             'title' => 'required|string|max:255',
-            'price' => 'required|string',
+            'description' => 'required|string',
+            'price' => 'required|numeric',
             'photo' => 'image|mimes:jpeg,png,jpg,gif|max:2048',
         ]);
 
-        $smartwatch = Smartwatchs::findOrFail($id);
-
-        $smartwatch->update([
-            'title' => $request->input('title'),
-            'price' => $request->input('price'),
-        ]);
+        $smartwatch = Smartwatch::findOrFail($id);
 
         // Handle photo update
         if ($request->hasFile('photo')) {
-            // Delete old poster
-            Storage::disk('public')->delete($smartwatch->photo);
+
+            if ($smartwatch->photo) {
+                // Delete old photo
+                Storage::disk('public')->delete($smartwatch->photo);
+            }
 
             // Store the new photo in the storage disk
             $posterPath = Storage::disk('public')->put('photo', $request->file('photo'));
 
-            // Update the poster path in the database
             $smartwatch->photo = $posterPath;
-            $smartwatch->save();
         }
 
-        return redirect()->route('show.home')->with('success', 'Product updated successfully!');
+        $smartwatch->update([
+            'title' => $request->input('title'),
+            'description' => $request->input('description'),
+            'price' => $request->input('price'),
+        ]);
+
+        return redirect()->route('smartwatchs.smartwatchs')->with('success', 'Product updated successfully!');
     }
 
     //delete
     public function destroy($id)
     {
-        $smartwatch = Smartphone::findOrFail($id);
+        $smartwatch = Smartwatch::findOrFail($id);
 
         // Retrieve the deleted product for display on the home page
         $deletedSmartwatch = $smartwatch->toArray();
@@ -118,7 +125,7 @@ class SmartwatchController extends Controller
         session(['deletedSmartwatchs' => $deletedSmartwatchs]);
 
         // Redirect to home page with success message
-        return redirect()->route('show.home')->with('success', 'Products deleted successfully!');
+        return redirect()->route('smartwatchs.smartwatchs')->with('success', 'Products deleted successfully!');
     }
 
 }

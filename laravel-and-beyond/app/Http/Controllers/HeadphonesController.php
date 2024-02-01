@@ -38,7 +38,7 @@ class HeadphonesController extends Controller
 
         $headphone = new Headphones;
         $headphone->title = $validatedData['title'];
-        $headphone->description = $validatedData['description']; // Add this line for the description field
+        $headphone->description = $validatedData['description'];
         $headphone->price = $validatedData['price'];
 
         // Store the image in the storage disk (public)
@@ -67,7 +67,7 @@ class HeadphonesController extends Controller
         // Validation
         $request->validate([
             'title' => 'required|string|max:255',
-            'description' => 'required|string', // Add description validation if necessary
+            'description' => 'required|string',
             'price' => 'required|numeric',
             'photo' => 'image|mimes:jpeg,png,jpg,gif|max:2048',
         ]);

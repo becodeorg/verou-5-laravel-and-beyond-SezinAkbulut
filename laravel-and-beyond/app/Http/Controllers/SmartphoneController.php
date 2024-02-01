@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Smartphone;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class SmartphoneController extends Controller
 {
@@ -17,7 +19,7 @@ class SmartphoneController extends Controller
     {
         $smartphone = Smartphone::find($id);
 
-        return view('smartphones.show', ['smartphone' => $smartphone]);
+        return view('categories.smartphones.show', ['smartphone' => $smartphone]);
     }
 
     //create and store method
@@ -33,6 +35,7 @@ class SmartphoneController extends Controller
 
         $validatedData = $request->validate([
             'title' => 'required',
+            'description' => 'required',
             'price' => 'required',
             'photo' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);
@@ -40,6 +43,7 @@ class SmartphoneController extends Controller
 
         $smartphone = new Smartphone;
         $smartphone->title = $validatedData['title'];
+        $smartphone->description = $validatedData['description'];
         $smartphone->price = $validatedData['price'];
 
         // Store the image in the storage disk (public)
@@ -47,14 +51,11 @@ class SmartphoneController extends Controller
         // $posterPath = $request->file('photos')->store('photos');
         // dd($posterPath);
 
-        // Update the image path in the database
         $smartphone->photo = $posterPath;
 
-        // Save other fields
         $smartphone->save();
-        // dd($product);
 
-        return redirect()->route('show.home')->with('success', 'Product created successfully!');
+        return redirect()->route('smartphones.smartphones')->with('success', 'Product created successfully!');
     }
 
     //edit and update
@@ -71,31 +72,33 @@ class SmartphoneController extends Controller
         // Validation
         $request->validate([
             'title' => 'required|string|max:255',
-            'price' => 'required|string',
+            'description' => 'required|string',
+            'price' => 'required|numeric',
             'photo' => 'image|mimes:jpeg,png,jpg,gif|max:2048',
         ]);
 
         $smartphone = Smartphone::findOrFail($id);
 
-        $smartphone->update([
-            'title' => $request->input('title'),
-            'price' => $request->input('price'),
-        ]);
-
         // Handle photo update
         if ($request->hasFile('photo')) {
-            // Delete old poster
-            Storage::disk('public')->delete($smartphone->photo);
-
+            if ($smartphone->photo) {
+                // Delete old photo
+                Storage::disk('public')->delete($smartphone->photo);
+            }
             // Store the new photo in the storage disk
-            $posterPath = Storage::disk('public')->put('photo', $request->file('photo'));
+            $posterPath = Storage::disk('public')->put('photos', $request->file('photo'));
 
             // Update the poster path in the database
             $smartphone->photo = $posterPath;
-            $smartphone->save();
-        }
 
-        return redirect()->route('show.home')->with('success', 'Product updated successfully!');
+        }
+        $smartphone->update([
+            'title' => $request->input('title'),
+            'description' => $request->input('description'),
+            'price' => $request->input('price'),
+        ]);
+
+        return redirect()->route('smartphones.smartphones')->with('success', 'Product updated successfully!');
     }
 
     //delete
@@ -119,6 +122,6 @@ class SmartphoneController extends Controller
         session(['deletedSmartphones' => $deletedSmartphones]);
 
         // Redirect to home page with success message
-        return redirect()->route('show.home')->with('success', 'Products deleted successfully!');
+        return redirect()->route('smartphones.smartphones')->with('success', 'Products deleted successfully!');
     }
 }

@@ -1,7 +1,6 @@
 @extends('layouts.app')
 @section('title', 'Wireless Headphones')
 @section('content')
-    <h1>Wireless Headphones</h1>
     <br>
     <br>
     <br><br>
@@ -34,8 +33,7 @@
 
                         <div class="card-body mt-6 text-white">
                             <h5 class="card-title text-light text-white text-2xl">{{ $headphone->title }}</h5>
-                            <p class="text-white">{{ $headphone->description }}</p>
-                            <p class="text-white">Price: ${{ $headphone->price }}</p>
+                            <p class="text-white">€{{ $headphone->price }}</p>
                         </div>
                     </div>
                 </div>
