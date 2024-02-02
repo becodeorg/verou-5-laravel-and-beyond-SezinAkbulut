@@ -31,6 +31,7 @@
     @yield('content')
 </div>
 
+
 <br><br>
 <footer class="text-center mb-5 bg-purple-950 text-white p-6">
     @include('partials.footer')

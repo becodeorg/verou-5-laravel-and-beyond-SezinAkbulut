@@ -28,6 +28,22 @@
                     <li>
                         <a href="{{ route('showRegister') }}" class="px-3 text-light">Register</a>
                     </li>
+
+                    @auth
+                        <!-- User is logged in, show logout button -->
+                        <form method="POST" action="{{ route('logout') }}">
+                            @csrf
+                            <button type="submit" class="text-sm px-3 py-1 border rounded focus:outline-none">
+                                Logout
+                            </button>
+                        </form>
+                    @else
+                        <!-- User is not logged in, show login button -->
+                        <a href="{{ route('login') }}" class="text-sm px-3 py-1 border rounded focus:outline-none">
+                            Sign in
+                        </a>
+                    @endauth
+
                     <!--Cart-->
                     <a href="{{ route('cart') }}" class="text-sm px-3 py-1 border rounded-full focus:outline-none">
                         <i class="fas fa-shopping-cart"></i> <!-- Font Awesome cart icon -->

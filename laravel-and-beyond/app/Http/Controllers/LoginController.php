@@ -8,31 +8,32 @@ use App\Models\User;
 
 class LoginController extends Controller
 {
-public function index()
-{
-
-}
-    public function login (Request $request)
+    public function index()
     {
-        //validate request
-        $validated  = $request->validate([
+        return view('auth.login');
+    }
+
+    public function login(Request $request)
+    {
+        // validate request
+        $validated = $request->validate([
             "email" => "required|email",
             "password" => "required",
         ]);
 
-        //Attempt to login user
-        if (Auth ::attempt($validated)) {
-            $request ->session()->regenerate();
+        // attempt to login user
+        if (Auth::attempt($validated)) {
+            $request->session()->regenerate();
             return redirect("show.home");
         }
-        return  back();
-        //Redirct to home page
+
+        return back();
     }
 
-    public function destroy ()
+    public function destroy()
     {
-        aut () -> logut();
-        return redirect (   "show.home");
+        Auth::logout();
+        return redirect("show.home");
     }
 
 }
