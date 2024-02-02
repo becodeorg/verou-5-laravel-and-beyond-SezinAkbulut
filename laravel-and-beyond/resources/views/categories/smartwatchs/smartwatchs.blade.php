@@ -36,6 +36,10 @@
                                 <h5 class="card-title text-light text-2xl">{{ $smartwatch->title }}</h5>
                                 <p>€{{ $smartwatch->price }}</p>
                             </div>
+                            <form action="{{ route('cart.add', ['productId' => $product->id]) }}" method="post">
+                                @csrf
+                                <button type="submit">Add to Cart</button>
+                            </form>
                         </div>
                     </div>
                 @endforeach

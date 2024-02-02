@@ -21,6 +21,10 @@
                     <p class="card-text text-light">{{ $smartphone->description }}</p>
                     <p class="card-text text-light">{{ $smartphone->price }}</p>
                     <br>
+                    <form action="{{ route('cart.add', ['productId' => $product->id]) }}" method="post">
+                        @csrf
+                        <button type="submit">Add to Cart</button>
+                    </form>
                     <a href="{{ route('edit_smartphones', ['id' => $smartphone->id]) }}" class="bg-yellow-500 text-white py-2 px-4 rounded-md">Update</a>
                     <form action="{{ route('destroy_smartphones', ['id' => $smartphone->id]) }}" method="post" style="display: inline-block;">
                         @csrf
