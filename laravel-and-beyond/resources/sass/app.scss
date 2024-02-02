@@ -1,14 +1,25 @@
 @import 'tailwind.css';
 
 
-// Night Mode
-.dark-mode {
-    background-color: #000000;
-    color: #cbd5e0;
+// Common styles for both modes
+.text-dark {
+    color: #1a202c;
 }
 
 // Day Mode
 .light-mode {
     background-color: #ffffff;
-    color: #1a202c;
+
+    .text-dark {
+        color: #1a202c;
+    }
+}
+
+// Night Mode
+.dark-mode {
+    background-color: #000000;
+
+    .text-light {
+        color: #cbd5e0;
+    }
 }

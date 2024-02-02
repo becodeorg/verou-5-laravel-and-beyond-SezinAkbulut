@@ -14,12 +14,12 @@
         <h1 class="text-3xl font-bold text-center mt-8 mb-6 text-orange-500">Product Details</h1>
         <br><br>
         @if($headphone)
-            <div class="card bg-dark mb-3 mx-auto max-w-sm text-white">
+            <div class="card bg-dark mb-3 mx-auto max-w-sm text-light">
                 <img src="{{ asset('storage/' . $headphone->photo) }}" class="card-img-top custom-thumbnail mx-auto mt-4" alt="{{ $headphone->title }}">
-                <div class="card-body text-white">
-                    <h5 class="card-title  text-white text-3xl mt-2 text-light">{{ $headphone->title }}</h5>
-                    <p class="card-text text-light">{{ $headphone->description }}</p>
-                    <p class="card-text text-light">{{ $headphone->price }}</p>
+                <div class="card-body text-light">
+                    <h5 class="card-title text-3xl mt-2">{{ $headphone->title }}</h5>
+                    <p class="card-text">{{ $headphone->description }}</p>
+                    <p class="card-text">{{ $headphone->price }}</p>
                     <br>
                     <a href="{{ route('edit_headphones', ['id' => $headphone->id]) }}" class="bg-yellow-500 text-white py-2 px-4 rounded-md">Update</a>
                     <form action="{{ route('destroy_headphones', ['id' => $headphone->id]) }}" method="post" style="display: inline-block;">

@@ -1,30 +1,46 @@
+@php
+    $currentMode = 'day'; // You need to set this based on your logic
+@endphp
+
 <!--Header image-->
 <div class="relative flex justify-end">
-   <img src="{{ asset('images/day-header.png') }}" alt="Header Image" id="header-image" class="h-full right-0" z-10>
+    <img src="{{ asset("images/{$currentMode}-header.png") }}" alt="Header Image" id="header-image" class="h-full right-0" z-10>
 
     <div class="header-content absolute p-4 text-left text-black font-proxima-nova w-full">
         <!-- nav bar -->
         <nav class="p-4 w-full absolute top-2 left-0 z-10">
             <div class="flex items-center justify-between w-full">
-                <ul class="flex text-white font-medium space-x-4 ml-5">
-                    <a href="{{ route('show.home') }}" class="text-lg font-semibold">Your Logo</a>
+                <div class="flex items-center space-x-1 ml-5">
+                    <a href="{{ route('show.home') }}" class="text-sm font-semibold">
+                        <img src="{{ asset("images/zarla-shop-stock-1x1-2400x2400-2.png") }}" alt="Logo" class="h-16 w-16">
+                    </a>
+                </div>
 
+                <ul class="flex text-light font-medium space-x-1">
                     <li>
-                        <a href="{{ route('show.home') }}" >Home</a>
+                        <a href="{{ route('show.home') }}" class="px-3 text-light" >Home</a>
                     </li>
 
                     <li>
-                    <a href="{{ route('showUsers') }}" >Users</a>
-                    <li>
-
-                        <a href="{{ route('showRegister') }}" >Register</a>
+                        <a href="{{ route('showUsers') }}" class="px-3 text-light">Users</a>
                     </li>
 
-
-                    <button id="toggle-mode" class="text-sm px-3 py-1 border rounded focus:outline-none">
-                        Toggle Mode
-                    </button>
+                    <li>
+                        <a href="{{ route('showRegister') }}" class="px-3 text-light">Register</a>
+                    </li>
+                    <!--Cart-->
+                    <a href="{{ route('cart') }}" class="text-sm px-3 py-1 border rounded-full focus:outline-none">
+                        <i class="fas fa-shopping-cart"></i> <!-- Font Awesome cart icon -->
+                    </a>
+                    <!--Day/Night Mode Toggle-->
+                    <div class="mood">
+                        <label class="switch">
+                            <input type="checkbox" id="toggle-mode">
+                            <span class="slider round" id="slider"></span>
+                        </label>
+                    </div>
                 </ul>
+                <!--Search bar-->
                 <form action="{{ route('search') }}" method="GET" class="flex items-center">
                     <input type="search" name="query" placeholder="Search..." class="form-input rounded-l-md border border-gray-200 py-1 px-2">
                     <button type="submit" class="bg-orange-500 text-white rounded-r-md py-1 px-2">Search</button>
@@ -32,17 +48,19 @@
             </div>
         </nav>
 
-        <h1 class="left-10 top-52 text-7xl ml-20 absolute text-white">
+
+        <h1 class="left-10 top-52 text-7xl ml-20 absolute text-light">
             Let's Dive in <br> <span class="text-orange-500">Technology</span> World
         </h1>
         <br>
+        <!--Shop Now Button-->
         <a href="{{ route('create') }}" class="bg-orange-500 text-white rounded-md py-2 px-4 top-52 mt-48 ml-28 inline-block float-left absolute">
             Shop Now
         </a>
 
     </div>
-
-    <a href="#products" class="text-4xl top-1/2 mt-20 left-40 transform -translate-x-1/2 -translate-y-1/2 text-white absolute hover:text-orange-500 cursor-pointer">
+    <!--Scroll down button-->
+    <a href="#products" class="text-4xl bottom-28 left-40 transform -translate-x-1/2 -translate-y-1/2 text-dark absolute hover:text-orange-500 cursor-pointer">
         <i class="fas fa-chevron-down"></i>
     </a>
 
@@ -50,7 +68,77 @@
 
 
 
+<style>
+    /* The switch - the box around the slider */
+    .switch {
+        position: relative;
+        display: inline-block;
+        width: 50px;
+        height: 24px;
+    }
 
+    /* Hide default HTML checkbox */
+    .switch input {
+        opacity: 0;
+        width: 0;
+        height: 0;
+    }
+
+    /* The slider */
+    .slider {
+        position: absolute;
+        cursor: pointer;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-color: #ccc;
+        -webkit-transition: .4s;
+        transition: .4s;
+    }
+
+    .slider:before {
+        position: absolute;
+        content: "";
+        height: 16px;
+        width: 16px;
+        left: 3px;
+        bottom: 6px;
+        background-image: linear-gradient(140deg, #13161a, #5D697A);
+        box-shadow: inset 5px 5px 5px #5D697A,
+        inset -5px -5px 20px #5D697A,
+        5px 5px 5px #1d1f25;
+        -webkit-transition: .4s;
+        transition: .4s;
+    }
+
+    input:checked + .slider {
+        background-image: linear-gradient(140deg, #BC5A17, #E09121);
+        box-shadow: inset 5px 5px 5px #E09121,
+        inset -5px -5px 20px #e99725,
+        5px 5px 5px #1d1f25;
+    }
+
+    input:focus + .slider {
+        box-shadow: 0 0 1px #e99725;
+    }
+
+    input:checked + .slider:before {
+        -webkit-transform: translateX(26px);
+        -ms-transform: translateX(26px);
+        transform: translateX(26px);
+    }
+
+    /* Rounded sliders */
+    .slider.round {
+        border-radius: 34px;
+    }
+
+    .slider.round:before {
+        border-radius: 50%;
+
+    }
+</style>
 
 
 <!--

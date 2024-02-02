@@ -5362,18 +5362,35 @@ module.exports = axios;
 /***/ ((__unused_webpack_module, __unused_webpack_exports, __webpack_require__) => {
 
 __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
-document.addEventListener('DOMContentLoaded', function () {
-  var toggleButton = document.getElementById('toggle-mode');
-  var body = document.body;
-  var headerImage = document.getElementById('header-image');
-  toggleButton.addEventListener('click', function () {
-    body.classList.toggle('light-mode');
-    body.classList.toggle('dark-mode');
 
-    // Update header image source based on the selected mode
-    var currentMode = body.classList.contains('light-mode') ? 'day' : 'night';
-    headerImage.src = "{{ asset(\"images/".concat(currentMode, "-header.jpg\") }}");
-  });
+// app.js
+
+// app.js
+
+document.addEventListener('DOMContentLoaded', function () {
+  var toggleModeButton = document.getElementById('toggle-mode');
+  var headerImage = document.getElementById('header-image');
+  var slider = document.getElementById('slider');
+  if (toggleModeButton && headerImage) {
+    toggleModeButton.addEventListener('click', function () {
+      // Toggle the mode (this is just an example, you need your own logic)
+      var currentMode = document.body.classList.contains('light-mode') ? 'night' : 'day';
+
+      // Update the body class to reflect the new mode
+      document.body.classList.toggle('light-mode');
+      document.body.classList.toggle('dark-mode');
+
+      // Update the header image based on the mode
+      headerImage.src = "/images/".concat(currentMode, "-header.png");
+
+      // Move the slider based on the mode
+      if (currentMode === 'night') {
+        slider.style.transform = 'translateX(26px)';
+      } else {
+        slider.style.transform = 'translateX(0)';
+      }
+    });
+  }
 });
 
 /***/ }),

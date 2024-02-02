@@ -16,7 +16,7 @@
         <h1 class="text-3xl font-bold text-center mt-8 mb-6 text-orange-500">Smartwatches</h1>
         <!-- Display products -->
 
-        <a href="{{ route('create_smartwatchs') }}" class="bg-orange-500  float-right text-white rounded-md py-2 px-4 mt-2 ml-28 inline-block absolute">
+        <a href="{{ route('create_smartwatchs') }}" class="bg-orange-500 right-10 float-right text-white rounded-md py-2 px-4 mt-2 ml-28 inline-block absolute">
             Add new product
         </a>
         @if ($smartwatchs->count() > 0)
@@ -32,9 +32,9 @@
                                 <img src="{{ asset('storage/' . $smartwatch->photo) }}" class="card-img-top custom-thumbnail mx-auto mt-4" alt="{{ $smartwatch->title }}">
                             </a>
 
-                            <div class="card-body mt-6 text-white">
-                                <h5 class="card-title text-light text-white text-2xl">{{ $smartwatch->title }}</h5>
-                                <p class="text-white">€{{ $smartwatch->price }}</p>
+                            <div class="card-body mt-6 text-light">
+                                <h5 class="card-title text-light text-2xl">{{ $smartwatch->title }}</h5>
+                                <p>€{{ $smartwatch->price }}</p>
                             </div>
                         </div>
                     </div>

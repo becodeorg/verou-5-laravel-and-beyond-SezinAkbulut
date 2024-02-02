@@ -16,7 +16,7 @@
         @if($smartwatch)
             <div class="card bg-dark mb-3 mx-auto max-w-sm">
                 <img src="{{ asset('storage/' . $smartwatch->photo) }}" class="card-img-top custom-thumbnail mx-auto mt-4" alt="{{ $smartwatch->title }}">
-                <div class="card-body text-white">
+                <div class="card-body text-light">
                     <h5 class="card-title text-3xl mt-2 text-light">{{ $smartwatch->title }}</h5>
                     <p class="card-text text-light">{{ $smartwatch->description }}</p>
                     <p class="card-text text-light">{{ $smartwatch->price }}</p>

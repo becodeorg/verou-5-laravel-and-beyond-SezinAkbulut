@@ -17,10 +17,10 @@
         @if ($products->count() > 0)
             <div class="float-right  grid grid-cols-1 md:grid-cols-1 lg:grid-cols-3 gap-6 mx-auto">
                 @foreach ($products as $product)
-                    <div class="products  relative z-10">
+                    <div class="products bg-light-mode relative z-10">
                         <br>
 
-                        <div class=" card object-top glass-effect mx-auto">
+                        <div class=" card object-top glass-effect  mx-auto">
                             {{--  <a href="{{ route('details', ['id' => $product->id]) }}">--}}
                            <a href="{{ $product->id == 1 ? route('headphones.headphones') : ($product->id == 2 ? route('smartwatchs.smartwatchs') : ($product->id == 3 ? route('smartphones.smartphones') : route('details', ['id' => $product->id]))) }}">
 
@@ -28,7 +28,7 @@
                             </a>
 
                             <div class="card-body mt-6">
-                                <h5 class="card-title text-light text-white text-2xl">{{ $product->title }}</h5>
+                                <h5 class="card-title text-light text-light text-2xl">{{ $product->title }}</h5>
                             </div>
                         </div>
                     </div>
@@ -76,13 +76,13 @@
             .products {
                 width: 300px;
                 height: 180px;
-                background: linear-gradient(116deg, rgba(192, 192, 192, 0.63) -10.88%, rgba(255, 255, 255, 0.49) -10.87%, rgba(255, 255, 255, 0.07) 74.79%);
+                background: linear-gradient(116deg, rgba(192, 192, 192, 0.63) -10.88%, rgba(255, 255, 255, 0.49) -10.87%, rgba(203, 203, 203, 0.07) 74.79%);
                 backdrop-filter: blur(15px);
                 border-radius: 25px;
                 border: 1px solid rgba(255, 255, 255, 0.70);
                 backdrop-filter: blur(15px);
                 position: relative;
-                top: 3rem;
+                top: 2rem;
 
                 margin: 0;
                 padding: 0;

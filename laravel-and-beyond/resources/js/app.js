@@ -1,20 +1,39 @@
 
 require('./bootstrap');
+
+// app.js
+
+// app.js
+
 document.addEventListener('DOMContentLoaded', function () {
     const toggleModeButton = document.getElementById('toggle-mode');
     const headerImage = document.getElementById('header-image');
+    const slider = document.getElementById('slider');
 
-    let currentMode = 'day'; // Set the default mode
+    if (toggleModeButton && headerImage) {
+        toggleModeButton.addEventListener('click', function () {
+            // Toggle the mode (this is just an example, you need your own logic)
+            const currentMode = document.body.classList.contains('light-mode') ? 'night' : 'day';
 
-    toggleModeButton.addEventListener('click', function () {
-        // Toggle between day and night mode
-        currentMode = currentMode === 'day' ? 'night' : 'day';
+            // Update the body class to reflect the new mode
+            document.body.classList.toggle('light-mode');
+            document.body.classList.toggle('dark-mode');
 
-        // Update background image based on the selected mode
-        const imageUrl = currentMode === 'day' ? '{{ asset("images/day-header.png") }}' : '{{ asset("images/night-header.png") }}';
-        headerImage.src = imageUrl;
+            // Update the header image based on the mode
+            headerImage.src = `/images/${currentMode}-header.png`;
 
-        // You can also update other styles or classes based on the mode if needed
-        document.body.classList.toggle('night-mode', currentMode === 'night');
-    });
+            // Move the slider based on the mode
+            if (currentMode === 'night') {
+                slider.style.transform = 'translateX(16px)';
+            } else {
+                slider.style.transform = 'translateX(0)';
+            }
+        });
+    }
 });
+
+
+
+
+
+

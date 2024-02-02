@@ -14,7 +14,7 @@
         <h1 class="text-3xl font-bold text-center mt-8 mb-6 text-orange-500">Product Details</h1>
         <br><br>
         @if($smartphone)
-            <div class="card bg-dark mb-3 mx-auto max-w-sm text-white">
+            <div class="card bg-dark mb-3 mx-auto max-w-sm text-light">
                 <img src="{{ asset('storage/' . $smartphone->photo) }}" class="card-img-top custom-thumbnail mx-auto mt-4" alt="{{ $smartphone->title }}">
                 <div class="card-body">
                     <h5 class="card-title text-3xl mt-2 text-light">{{ $smartphone->title }}</h5>
