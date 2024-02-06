@@ -139,4 +139,32 @@ class HeadphonesController extends Controller
         return redirect()->route('headphones.headphones')->with('success', 'Products deleted successfully!');
     }
 
+
+    //add to cart
+    public function addToCart(Request $request, $productId)
+    {
+        $product = Headphones::find($productId);
+
+        if (!$product) {
+            // Handle product not found
+            return redirect()->back()->with('error', 'Product not found.');
+        }
+
+        // Get the current cart from the session or create an empty array
+        $cart = session('cart', []);
+
+        // Add the product to the cart
+        $cart[$productId] = [
+            'id' => $product->id,
+            'title' => $product->title,
+            'price' => $product->price,
+            // Add other product details as needed
+        ];
+
+        // Store the updated cart in the session
+        session(['cart' => $cart]);
+
+        return redirect()->back()->with('success', 'Product added to cart successfully.');
+    }
+
 }

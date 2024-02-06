@@ -64,6 +64,10 @@ Route::put('/headphones/update/{id}', [HeadphonesController::class, 'update'])->
 // Delete
 Route::delete('/headphones/{id}', [HeadphonesController::class, 'destroy'])->name('destroy_headphones');
 
+//add to cart for headphones
+Route::post('/headphones/add-to-cart/{productId}', [HeadphonesController::class, 'addToCart'])->name('headphones.addToCart');
+
+
 //SMARTWATCHES
 
 Route::get('/smartwatches', [SmartwatchController::class, 'index'])->name('smartwatchs.smartwatchs')->middleware('auth');

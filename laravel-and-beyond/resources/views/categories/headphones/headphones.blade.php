@@ -44,9 +44,9 @@
                         </div>
 
                         <br>
-                        <form action="{{ route('cart.add', ['productId' => $headphone->id]) }}" method="post">
+                        <form action="{{ route('headphones.addToCart', ['productId' => $headphone->id]) }}" method="post">
                             @csrf
-                            <button type="submit">Add to Cart</button>
+                            <button class="bg-orange-500 text-white py-2 px-4 rounded-md" type="submit">Add to Cart</button>
                         </form>
                     </div>
                 </div>
