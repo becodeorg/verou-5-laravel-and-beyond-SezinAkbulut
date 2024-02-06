@@ -8,7 +8,7 @@ use App\Http\Controllers\SmartphoneController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\UserController;
-use App\Http\Controllers\CartController;
+use App\Http\Controllers\CategoryController;
 
 /*
 |--------------------------------------------------------------------------
@@ -45,6 +45,9 @@ Route::get('/product/{id}', [ProductController::class, 'showDetails'])->name('de
 
 
 //CATEGORIES
+Route::get('/categories/{category}', [CategoryController::class, 'show'])->name('categories.show');
+Route::get('/categories/{category}/products/{product}', [ProductController::class, 'show'])->name('products.show');
+
 //HEADPHONES
 
 Route::get('/headphones', [HeadphonesController::class, 'index'])->name('headphones.headphones');
@@ -93,8 +96,9 @@ Route::put('/smartphones/update/{id}', [SmartphoneController::class, 'update'])-
 Route::delete('/smartphones/{id}', [SmartphoneController::class, 'destroy'])->name('destroy_smartphones');
 
 //REGISTER
-Route::get("users", [UserController::class, 'index'])->name("showUsers");
-Route::get("users/{id}", [UserController::class, 'show'])->name("showUser");
+Route::get("/users", [UserController::class, 'index'])->name("showUsers");
+Route::get("/users/{id}", [UserController::class, 'show'])->name("showUser");
+
 
 // LOGIN
 Route::middleware(['guest'])->group(function () {
@@ -116,12 +120,10 @@ Route::get('/cart', [CartController::class, 'index'])->name('cart');
 // Add a product to the cart
 Route::post('/cart/add', [CartController::class, 'addToCart'])->name('cart.add');
 
-// routes/web.php for show cart and remove from cart
+// Show cart and remove from cart
 Route::middleware(['web', 'auth'])->group(function () {
-    // Your cart-related routes go here
-    Route::get('/cart', 'CartController@showCart')->name('cart.show');
-    // Add a route to handle item removal
-    Route::delete('/cart/remove/{id}', 'CartController@removeFromCart')->name('cart.removeFromCart');
+    Route::get('/cart/show', [CartController::class, 'showCart'])->name('cart.show');
+    Route::delete('/cart/remove/{id}', [CartController::class, 'removeFromCart'])->name('cart.removeFromCart');
 });
 
 

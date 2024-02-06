@@ -30,6 +30,10 @@
                 <input name="name" type="text" id="name" class="w-full border border-gray-300 rounded-md p-2" placeholder="Your name...">
             </div>
             <div class="mb-4">
+                <label for="email" class="block text-gray-700 text-sm font-bold mb-2">Email</label>
+                <input name="email" type="text" id="email" class="w-full border border-gray-300 rounded-md p-2" placeholder="Your email adres...">
+            </div>
+            <div class="mb-4">
                 <label for="password" class="block text-gray-700 text-sm font-bold mb-2">Password</label>
                 <input name="password" type="password" id="password" class="w-full border border-gray-300 rounded-md p-2">
             </div>

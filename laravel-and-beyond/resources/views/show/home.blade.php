@@ -30,6 +30,8 @@
                             <div class="card-body mt-6">
                                 <h5 class="card-title text-light text-light text-2xl">{{ $product->title }}</h5>
                             </div>
+                            <p>Category: {{ $product->category->name }}</p>
+                            <p>Created by: {{ $product->user->name }}</p>
                         </div>
                     </div>
                 @endforeach
@@ -76,20 +78,19 @@
             .products {
                 width: 300px;
                 height: 180px;
-                background: linear-gradient(116deg, rgba(192, 192, 192, 0.63) -10.88%, rgba(255, 255, 255, 0.49) -10.87%, rgba(203, 203, 203, 0.07) 74.79%);
+                background: linear-gradient(116deg, rgba(192, 192, 192, 0.63) -10.88%, rgba(255, 255, 255, 0.49) -10.87%, rgba(56, 56, 56, 0.07) 74.79%);
                 backdrop-filter: blur(15px);
                 border-radius: 25px;
                 border: 1px solid rgba(255, 255, 255, 0.70);
                 backdrop-filter: blur(15px);
                 position: relative;
-                top: 2rem;
-
+                top: 1rem;
                 margin: 0;
                 padding: 0;
             }
             .card {
                 position: relative;
-                bottom: 8rem;
+                bottom: 10rem;
             }
 
             .card-img-top {

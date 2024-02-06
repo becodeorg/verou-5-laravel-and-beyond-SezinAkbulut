@@ -5,6 +5,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Http\Request;
 use App\Models\User;
+use Illuminate\Support\Facades\Auth;
 
 class LoginController extends Controller
 {
@@ -24,7 +25,7 @@ class LoginController extends Controller
         // attempt to login user
         if (Auth::attempt($validated)) {
             $request->session()->regenerate();
-            return redirect("show.home");
+            return redirect(route('show.home'))->with('success', 'You login successfully!');
         }
 
         return back();
@@ -33,7 +34,7 @@ class LoginController extends Controller
     public function destroy()
     {
         Auth::logout();
-        return redirect("show.home");
+        return redirect(route('show.home'));
     }
 
 }

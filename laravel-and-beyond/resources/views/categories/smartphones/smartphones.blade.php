@@ -35,9 +35,9 @@
                                 <h5 class="card-title text-2xl">{{ $smartphone->title }}</h5>
                                 <p>€{{ $smartphone->price }}</p>
                             </div>
-                            <form action="{{ route('cart.add', ['productId' => $product->id]) }}" method="post">
+                            <form action="{{ route('cart.add', ['productId' => $smartphone->id]) }}" method="post">
                                 @csrf
-                                <button type="submit">Add to Cart</button>
+                                <button class="bg-orange-500 text-white py-2 px-4 rounded-md" type="submit">Add to Cart</button>
                             </form>
                         </div>
                     </div>

@@ -10,6 +10,8 @@
     <br><br>
     <br><br>
     <br><br>
+    <br><br>
+    <br><br>
     <div class="text-center mt-5">
         <h1 class="text-3xl font-bold text-center mt-8 mb-6 text-orange-500">Product Details</h1>
         <br><br>
@@ -30,7 +32,7 @@
                 </div>
             </div>
         @else
-            <p>Product not found.</p>
+            <p class="text-light">Product not found.</p>
         @endif
     </div>
 <br><br>

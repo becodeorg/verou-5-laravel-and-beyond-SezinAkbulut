@@ -27,6 +27,17 @@
             <textarea class="form-input border w-full p-2" name="price" id="price" required></textarea>
         </div>
 
+        <div>
+            <label for="category" class="block text-gray-700 text-sm font-bold mb-2">Choose a category:</label>
+            <select name="category"  class="text-orange-500">
+                @foreach($categories as $category)
+                <option id="category" value= {{ $category -> id }}>
+                   {{$category -> name}}
+                </option>
+                @endforeach
+            </select>
+        </div>
+        <br>
         <div class="mb-4">
             <label for="photo" class="block text-gray-700 text-sm font-bold mb-2">Photo:</label>
             <input type="file" name="photo" class="form-input border w-full p-2">

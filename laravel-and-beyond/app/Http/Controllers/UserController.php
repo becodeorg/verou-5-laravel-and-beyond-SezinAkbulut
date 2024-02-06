@@ -8,13 +8,12 @@ use Illuminate\Http\Request;
 
 class UserController extends Controller
 {
-    public function index()
-    {
+    public function index() {
+        // Assuming you want to retrieve all users
         $users = User::all();
 
-        return view("users.index", [
-            "users" => $users,
-        ]);
+        // Pass the users variable to the view
+        return view('users.index', compact('users'));
     }
 
     public function show($id)
@@ -24,5 +23,10 @@ class UserController extends Controller
         return view("users.show", [
             "user" => $user,
         ]);
+    }
+
+    public function cart()
+    {
+        return $this->hasOne(Cart::class);
     }
 }

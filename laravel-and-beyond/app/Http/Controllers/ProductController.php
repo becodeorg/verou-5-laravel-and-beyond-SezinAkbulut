@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+use App\Models\Category;
 
 use App\Models\Product;
 
@@ -12,21 +13,26 @@ class ProductController extends Controller
     /**
      * Display a listing of the resource.
      */
+
     public function index()
     {
-        $products = Product::all();  // Or however you fetch your products
+        $products = Product::with('category', 'user')->get();
 
         // Filter popular trend products
-        $popularTrendProducts = $products->where('popular_trend', true);
+         $popularTrendProducts = $products->where('popular_trend', true);
 
-        return view('show.home', compact('products', 'popularTrendProducts'));
+        return view('show.home', compact('products', /*'popularTrendProducts'*/));
     }
+
     /**
      * Show the form for creating a new resource.
      */
     public function create(Request $request)
     {
-        return view('crud.create');
+        $categories = Category::all();
+        return view('crud.create', [
+            "categories" => $categories
+        ]);
     }
 
     /**
@@ -40,13 +46,16 @@ class ProductController extends Controller
         $validatedData = $request->validate([
             'title' => 'required',
             'price' => 'required',
+            'category' => 'required',
             'photo' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);
         //dd($validatedData);
 
         $product = new Product;
         $product->title = $validatedData['title'];
+        $product->category_id = $validatedData['category'];
         $product->price = $validatedData['price'];
+        $product->user_id = auth()->user()->id;
 
         // Store the image in the storage disk (public)
         $posterPath = Storage::disk('public')->put('photos', $request->file('photo'));
@@ -86,7 +95,7 @@ class ProductController extends Controller
             'photo' => 'image|mimes:jpeg,png,jpg,gif|max:2048',
         ]);
 
-        // Update movie based on $id
+        // Update product based on $id
         $product = Product::findOrFail($id);
 
         // Update fields
@@ -97,13 +106,15 @@ class ProductController extends Controller
 
         // Handle photo update
         if ($request->hasFile('photo')) {
-            // Delete old poster
-            Storage::disk('public')->delete($product->photo);
+            // Delete old photo if it exists
+            if ($product->photo) {
+                Storage::disk('public')->delete($product->photo);
+            }
 
             // Store the new photo in the storage disk
             $posterPath = Storage::disk('public')->put('photo', $request->file('photo'));
 
-            // Update the poster path in the database
+            // Update the photo path in the database
             $product->photo = $posterPath;
             $product->save();
         }
@@ -152,6 +163,11 @@ class ProductController extends Controller
         $product = Product::find($id);
 
         return view('details.details', ['product' => $product]);
+    }
+
+
+    public function show(Category $category, Product $product) {
+        return view('products.show', compact('category', 'product'));
     }
 
 }

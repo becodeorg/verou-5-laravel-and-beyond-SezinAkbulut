@@ -21,47 +21,80 @@
                         <a href="{{ route('show.home') }}" class="px-3 text-light" >Home</a>
                     </li>
 
+                    <!-- Dropdown menu for Categories -->
+                    <div class="relative inline-block text-left group">
+                        <button type="button" class="inline-flex items-center px-2 py-1 border border-transparent text-sm font-medium rounded-md text-white bg-orange-500 hover:bg-orange-900 focus:outline-none focus:ring focus:border-orange-500 active:bg-orange-900">
+                            Categories
+                            <svg class="w-4 h-4 ml-2 -mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                            </svg>
+                        </button>
+
+                        <div class="hidden group-hover:block absolute right-0 mt-2 w-40 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5">
+                            <div class="py-1" role="menu" aria-orientation="vertical" aria-labelledby="options-menu">
+                                <a href="{{ route('headphones.headphones') }}" class="block px-4 py-2 text-sm text-orange-500 hover:bg-gray-100 hover:text-gray-900" role="menuitem">Headphones</a>
+                                <a href="{{ route('smartwatchs.smartwatchs') }}" class="block px-4 py-2 text-sm text-orange-500 hover:bg-gray-100 hover:text-gray-900" role="menuitem">Smartwatches</a>
+                                <a href="{{ route('smartphones.smartphones') }}" class="block px-4 py-2 text-sm text-orange-500 hover:bg-gray-100 hover:text-gray-900" role="menuitem">Smartphones</a>
+                            </div>
+                        </div>
+                    </div>
+
+
+
                     <li>
                         <a href="{{ route('showUsers') }}" class="px-3 text-light">Users</a>
                     </li>
 
-                    <li>
-                        <a href="{{ route('showRegister') }}" class="px-3 text-light">Register</a>
-                    </li>
-
-                    @auth
-                        <!-- User is logged in, show logout button -->
-                        <form method="POST" action="{{ route('logout') }}">
-                            @csrf
-                            <button type="submit" class="text-sm px-3 py-1 border rounded focus:outline-none">
-                                Logout
-                            </button>
-                        </form>
-                    @else
-                        <!-- User is not logged in, show login button -->
-                        <a href="{{ route('login') }}" class="text-sm px-3 py-1 border rounded focus:outline-none">
-                            Sign in
-                        </a>
-                    @endauth
-
                     <!--Cart-->
-                    <a href="{{ route('cart') }}" class="text-sm px-3 py-1 border rounded-full focus:outline-none">
+                    <a href="{{ route('cart') }}" class="text-sm px-5 py-1 border rounded-full text-orange-500 focus:outline-none">
                         <i class="fas fa-shopping-cart"></i> <!-- Font Awesome cart icon -->
                     </a>
                     <!--Day/Night Mode Toggle-->
-                    <div class="mood">
+                    <div class="mood px-5 ">
                         <label class="switch">
                             <input type="checkbox" id="toggle-mode">
                             <span class="slider round" id="slider"></span>
                         </label>
                     </div>
                 </ul>
+
+
+                <div class="flex items-center space-x-4">
+                <!--login button-->
+                @auth
+                    <div class="text-light ml-5 float-right ">
+                        Welcome, <span class="text-orange-500">{{ auth()->user()->name }}</span>!
+                    </div>
+                    <!-- User is logged in, show logout button -->
+                    <form method="POST" action="{{ route('logout') }}">
+                        @csrf
+                        <button type="submit" class="text-sm text-orange-500 px-3 py-1 border rounded focus:outline-none">
+                            Logout
+                        </button>
+                    </form>
+                @else
+                    <!-- User is not logged in, show login button -->
+                    <a href="{{ route('login') }}" class="text-sm text-orange-500 px-3 py-1 border rounded focus:outline-none">
+                        Sign in
+                    </a>
+                @endauth
+
+                <!--register button-->
+                <form method="GET" action="{{ route('showRegister') }}">
+                    @csrf
+                    <button type="submit" class="text-sm float-right text-white bg-orange-500 px-3 py-1 border rounded focus:outline-none">
+                        Register
+                    </button>
+                </form>
+
                 <!--Search bar-->
                 <form action="{{ route('search') }}" method="GET" class="flex items-center">
                     <input type="search" name="query" placeholder="Search..." class="form-input rounded-l-md border border-gray-200 py-1 px-2">
                     <button type="submit" class="bg-orange-500 text-white rounded-r-md py-1 px-2">Search</button>
                 </form>
             </div>
+            </div>
+
         </nav>
 
 
@@ -70,8 +103,12 @@
         </h1>
         <br>
         <!--Shop Now Button-->
-        <a href="{{ route('create') }}" class="bg-orange-500 text-white rounded-md py-2 px-4 top-52 mt-48 ml-28 inline-block float-left absolute">
+        <a href="#" class="bg-orange-500 text-white rounded-md py-2 px-4 top-52 mt-48 ml-28 inline-block float-left absolute">
             Shop Now
+        </a>
+        <!--Shop Now Button-->
+        <a href="{{ route('create') }}" class="border border-orange-500 text-orange-500 rounded-md py-2 px-4 top-52 left-32 mt-48 ml-28 inline-block float-left absolute">
+            Add New Category
         </a>
 
     </div>
@@ -154,6 +191,9 @@
         border-radius: 50%;
 
     }
+
+
+
 </style>
 
 

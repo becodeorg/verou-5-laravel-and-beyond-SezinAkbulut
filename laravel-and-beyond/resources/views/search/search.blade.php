@@ -3,7 +3,12 @@
 @section('title', 'Find a product')
 
 @section('content')
-
+    <br><br>
+    <br><br>
+    <br><br>
+    <br><br>
+    <br><br>
+    <br><br>
     <div class="container text-center mt-6 mx-auto">
         <h2 class="text-3xl font-bold text-center mt-8 mb-6 text-orange-500">Search Results for "{{ $query }}"</h2>
         <br>

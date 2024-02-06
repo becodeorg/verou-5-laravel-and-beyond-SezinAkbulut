@@ -21,9 +21,9 @@
                     <p class="card-text text-light">{{ $smartwatch->description }}</p>
                     <p class="card-text text-light">{{ $smartwatch->price }}</p>
                     <br>
-                    <form action="{{ route('cart.add', ['productId' => $product->id]) }}" method="post">
+                    <form action="{{ route('cart.add', ['productId' => $smartwatch->id]) }}" method="post">
                         @csrf
-                        <button type="submit">Add to Cart</button>
+                        <button class="bg-orange-500 text-white py-2 px-4 rounded-md" type="submit">Add to Cart</button>
                     </form>
                     <a href="{{ route('edit_smartwatchs', ['id' => $smartwatch->id]) }}" class="bg-yellow-500 text-white py-2 px-4 rounded-md">Update</a>
                     <form action="{{ route('destroy_smartwatchs', ['id' => $smartwatch->id]) }}" method="post" style="display: inline-block;">

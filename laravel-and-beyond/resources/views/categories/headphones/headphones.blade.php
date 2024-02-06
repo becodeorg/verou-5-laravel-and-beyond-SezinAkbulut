@@ -11,6 +11,7 @@
     </div>
 @endif
 
+
 <div class="container text-center">
      <h1 class="text-3xl font-bold text-center mt-8 mb-6 text-orange-500">Wireless Headphones</h1>
     <!-- Display products -->
