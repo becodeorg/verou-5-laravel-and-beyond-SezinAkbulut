@@ -11,12 +11,18 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('smartwatches', function (Blueprint $table) {
+        Schema::create('smartphones', function (Blueprint $table) {
             $table->id();
             $table->string('title');
             $table->text('description');
             $table->decimal('price', 8, 2);
             $table->string('photo')->nullable();
+            $table->unsignedBigInteger('category_id'); // Adjust the column name
+            $table->foreign('category_id')->references('id')->on('categories')->onDelete('cascade');
+            $table->foreignId('user_id')->constrained();
+
+            //  $table->unsignedBigInteger('product_id');
+            //$table->foreign('product_id')->references('id')->on('products')->onDelete('cascade');
             $table->timestamps();
         });
     }
@@ -26,6 +32,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('smartwatches');
+        Schema::dropIfExists('smartphones');
     }
 };

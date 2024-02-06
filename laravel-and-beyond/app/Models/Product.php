@@ -28,10 +28,52 @@ class Product extends Model
     // Timestamps
     public $timestamps = true;
 
+   /* public function category()
+    {
+        return $this->belongsTo(Category::class);
+    }
+   */
+    /*
+    public function category()
+    {
+        return $this->morphTo();
+    }
+
+    */
+
     public function category()
     {
         return $this->belongsTo(Category::class);
     }
+
+    public function headphones()
+    {
+        return $this->hasOne(Headphones::class);
+    }
+
+    public function smartphones()
+    {
+        return $this->hasOne(Smartphone::class);
+    }
+
+    public function smartwatches()
+    {
+        return $this->hasOne(Smartwatch::class);
+    }
+
+    /*
+   public function category()
+   {
+       return $this->morphTo();
+   }
+      */
+
+   /*
+   public function category()
+   {
+       return $this->belongsTo(Category::class);
+   }
+   */
 
     public function user()
     {

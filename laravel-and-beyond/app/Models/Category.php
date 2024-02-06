@@ -18,4 +18,21 @@ class Category extends Model
         return $this->hasMany(Product::class);
     }
 
+/*
+    public function products()
+    {
+        return $this->morphMany(Product::class, 'category');
+    }
+
+    public function products()
+    {
+        return $this->morphMany(Product::class, 'category', 'category_type', 'category_id');
+    }
+*/
+    /*
+    public function products()
+    {
+        return $this->hasMany(Product::class);
+    }
+    */
 }

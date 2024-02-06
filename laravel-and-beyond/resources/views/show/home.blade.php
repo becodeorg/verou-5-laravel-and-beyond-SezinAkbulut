@@ -30,7 +30,11 @@
                             <div class="card-body mt-6">
                                 <h5 class="card-title text-light text-light text-2xl">{{ $product->title }}</h5>
                             </div>
-                            <p>Category: {{ $product->category->name }}</p>
+                            @if ($product->category)
+                                <p>Category: {{ $product->category->name }}</p>
+                            @else
+                                <p>Category not available</p>
+                            @endif
                             <p>Created by: {{ $product->user->name }}</p>
                         </div>
                     </div>

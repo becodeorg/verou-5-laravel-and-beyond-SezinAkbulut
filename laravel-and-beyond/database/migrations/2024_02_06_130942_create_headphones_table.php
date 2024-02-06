@@ -16,7 +16,13 @@ return new class extends Migration
             $table->string('title');
             $table->text('description');
             $table->decimal('price', 8, 2);
-            $table->string('photo')->nullable(); // Add this line for the photo column
+            $table->string('photo')->nullable();
+            $table->unsignedBigInteger('category_id'); // Adjust the column name
+            $table->foreign('category_id')->references('id')->on('categories')->onDelete('cascade');
+            $table->foreignId('user_id')->constrained();
+
+            // $table->unsignedBigInteger('product_id'); // Add this line for the foreign key
+            //  $table->foreign('product_id')->references('id')->on('products')->onDelete('cascade');
             $table->timestamps();
         });
     }

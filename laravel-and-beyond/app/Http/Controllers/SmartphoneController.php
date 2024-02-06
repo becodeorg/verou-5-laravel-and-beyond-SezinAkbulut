@@ -10,9 +10,8 @@ class SmartphoneController extends Controller
 {
     public function index()
     {
-        $smartphones = Smartphone::all();
+        $smartphones = Smartphone::with('category')->get();
 
-        // Pass the headphones data to the view
         return view('categories.smartphones.smartphones', ['smartphones' => $smartphones]);
     }
     public function show($id)
@@ -38,6 +37,7 @@ class SmartphoneController extends Controller
             'description' => 'required',
             'price' => 'required',
             'photo' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'category' => 'required|exists:categories,id',
         ]);
         //dd($validatedData);
 
@@ -45,6 +45,8 @@ class SmartphoneController extends Controller
         $smartphone->title = $validatedData['title'];
         $smartphone->description = $validatedData['description'];
         $smartphone->price = $validatedData['price'];
+        $smartphone->category_id = $validatedData['category'];
+        $smartphone->user_id = auth()->user()->id;
 
         // Store the image in the storage disk (public)
         $posterPath = Storage::disk('public')->put('photos', $request->file('photo'));

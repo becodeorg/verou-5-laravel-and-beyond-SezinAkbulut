@@ -33,8 +33,15 @@
 
                             <div class="card-body mt-6 text-light">
                                 <h5 class="card-title text-2xl">{{ $smartphone->title }}</h5>
+                                <!-- Display user information -->
+                                <p>Created by: {{ $smartphone->user->name }}</p>
+                                <!-- Display category information -->
+                                <p>Category: {{ $smartphone->category ? $smartphone->category->name : 'Uncategorized' }}</p>
+                                <br>
                                 <p>€{{ $smartphone->price }}</p>
                             </div>
+                            <br>
+
                             <form action="{{ route('cart.add', ['productId' => $smartphone->id]) }}" method="post">
                                 @csrf
                                 <button class="bg-orange-500 text-white py-2 px-4 rounded-md" type="submit">Add to Cart</button>

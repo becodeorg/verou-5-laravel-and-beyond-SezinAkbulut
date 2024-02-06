@@ -2,6 +2,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Headphones;
+use App\Models\Category;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
@@ -9,10 +10,11 @@ class HeadphonesController extends Controller
 {
     public function index()
     {
-        $headphones = Headphones::all();
+        $headphones = Headphones::with('category')->get();
 
         return view('categories.headphones.headphones', ['headphones' => $headphones]);
     }
+
     public function show($id)
     {
         $headphone = Headphones::find($id);
@@ -24,8 +26,16 @@ class HeadphonesController extends Controller
     //create and store method
     public function create(Request $request)
     {
-        return view('categories.headphones.create_headphones');
+        // Example: Get the current category based on some condition
+        $currentCategory = Category::where('name', 'Headphones')->first();
+        // Pass other variables if needed
+        $otherVariables = // Your other variables here...
+        $categories = Category::all();
+
+        return view('categories.headphones.create_headphones', compact('currentCategory', 'categories', 'otherVariables'));
     }
+
+
 
     public function store(Request $request)
     {
@@ -34,12 +44,17 @@ class HeadphonesController extends Controller
             'description' => 'required',
             'price' => 'required',
             'photo' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'category' => 'required|exists:categories,id',
         ]);
+        \Log::info($request->all());
 
         $headphone = new Headphones;
         $headphone->title = $validatedData['title'];
         $headphone->description = $validatedData['description'];
         $headphone->price = $validatedData['price'];
+        $headphone->category_id = $validatedData['category'];
+        $headphone->user_id = auth()->user()->id;
+
 
         // Store the image in the storage disk (public)
         $posterPath = Storage::disk('public')->put('photos', $request->file('photo'));
@@ -115,7 +130,7 @@ class HeadphonesController extends Controller
         $deletedHeadphones = session('deletedHeadphone', []);
 
         // Add the deleted product to the list
-        $deletedHeadphones[$id] = $deletedHeadphones;
+        $deletedHeadphones[$id] = $deletedHeadphone;
 
         // Update the movies and deleted movies in the session
         session(['deletedHeadphones' => $deletedHeadphones]);

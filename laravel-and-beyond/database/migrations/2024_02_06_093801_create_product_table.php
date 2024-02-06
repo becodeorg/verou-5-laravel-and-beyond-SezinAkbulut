@@ -16,8 +16,15 @@ return new class extends Migration
             $table->string('title');
             $table->decimal('price', 8, 2);
             $table->string('photo')->nullable();
-            $table->foreignId('category_id');
+            /*  $table->foreignId('category_id');
+              $table->unsignedBigInteger('category_id');
+             $table->foreignId('category_id')->constrained('headphones')->onDelete('cascade'); */
+            $table->unsignedBigInteger('category_id')->constrained();
+            $table->unsignedBigInteger('user_id');
+            /*
+            $table->foreignId('category_id')->constrained();
             $table->foreignId('user_id');
+            */
             $table->timestamps();
         });
     }
@@ -30,9 +37,4 @@ return new class extends Migration
         Schema::dropIfExists('products');
     }
 };
-
-
-
-
-
 

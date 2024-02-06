@@ -10,7 +10,7 @@ class SmartwatchController extends Controller
 {
     public function index()
     {
-        $smartwatchs = Smartwatch::all();
+        $smartwatchs  = SmSmartwatch::with('category')->get();
 
         return view('categories.smartwatchs.smartwatchs', ['smartwatchs' => $smartwatchs]);
     }
@@ -37,6 +37,7 @@ class SmartwatchController extends Controller
             'description' => 'required',
             'price' => 'required',
             'photo' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'category' => 'required|exists:categories,id',
         ]);
         //dd($validatedData);
 
@@ -44,6 +45,8 @@ class SmartwatchController extends Controller
         $smartwatch->title = $validatedData['title'];
         $smartwatch->description = $validatedData['description'];
         $smartwatch->price = $validatedData['price'];
+        $smartwatch->category_id = $validatedData['category'];
+        $smartwatch->user_id = auth()->user()->id;
 
         // Store the image in the storage disk (public)
         $posterPath = Storage::disk('public')->put('photos', $request->file('photo'));

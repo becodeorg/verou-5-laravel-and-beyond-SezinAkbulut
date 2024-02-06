@@ -35,9 +35,15 @@
 
                         <div class="card-body mt-6 text-dark">
                             <h5 class="card-title text-2xl">{{ $headphone->title }}</h5>
+                            <!-- Display user information -->
+                            <p>Created by: {{ $headphone->user->name }}</p>
+                            <!-- Display category information -->
+                            <p>Category: {{ $headphone->category ? $headphone->category->name : 'Uncategorized' }}</p>
+                            <br>
                             <p>€{{ $headphone->price }}</p>
                         </div>
 
+                        <br>
                         <form action="{{ route('cart.add', ['productId' => $headphone->id]) }}" method="post">
                             @csrf
                             <button type="submit">Add to Cart</button>

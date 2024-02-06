@@ -11,7 +11,7 @@
     <br><br>
     <br><br>
     <title>{{env("APP_NAME") . "E-Commerce Project"}}</title>
-    <h1 class="text-3xl font-bold text-center mt-8 mb-6 text-orange-500">Create A New Product</h1>
+    <h1 class="text-3xl font-bold text-center mt-8 mb-6 text-orange-500">Create A New Category</h1>
 
     <!-- Form -->
     <form action="{{ route('store') }}" method="post" enctype="multipart/form-data" class="max-w-md mx-auto border border-gray-300 p-6 rounded-md">
