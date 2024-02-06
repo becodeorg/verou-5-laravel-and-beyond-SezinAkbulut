@@ -28,7 +28,7 @@ Route::get('/', [ProductController::class, 'index'])->name('show.home');
 
 //CRUD PRODUCTS HOME PAGE
 // Create
-Route::get('/product/create', [ProductController::class, 'create'])->name('create');
+Route::get('/product/create', [ProductController::class, 'create'])->name('create')->middleware('auth'); ;
 
 // Store
 Route::post('/product/store', [ProductController::class, 'store'])->name('store');
@@ -39,18 +39,18 @@ Route::put('/product/{id}', [ProductController::class, 'update'])->name('update'
 // Delete
 Route::delete('/product/{id}', [ProductController::class, 'destroy'])->name('destroy');
 //Search
-Route::get('/search', [ProductController::class, 'search'])->name('search');
+Route::get('/search', [ProductController::class, 'search'])->name('search')->middleware('auth'); ;
 //Show Details
 Route::get('/product/{id}', [ProductController::class, 'showDetails'])->name('details');
 
 
 //CATEGORIES
-Route::get('/categories/{category}', [CategoryController::class, 'show'])->name('categories.show');
-Route::get('/categories/{category}/products/{product}', [ProductController::class, 'show'])->name('products.show');
+Route::get('/categories/{category}', [CategoryController::class, 'show'])->name('categories.show')->middleware('auth'); ;
+Route::get('/categories/{category}/products/{product}', [ProductController::class, 'show'])->name('products.show')->middleware('auth'); ;
 
 //HEADPHONES
 
-Route::get('/headphones', [HeadphonesController::class, 'index'])->name('headphones.headphones');
+Route::get('/headphones', [HeadphonesController::class, 'index'])->name('headphones.headphones')->middleware('auth'); ;
 // Create
 Route::get('/headphones/create', [HeadphonesController::class, 'create'])->name('create_headphones');
 // Store
@@ -66,7 +66,7 @@ Route::delete('/headphones/{id}', [HeadphonesController::class, 'destroy'])->nam
 
 //SMARTWATCHES
 
-Route::get('/smartwatches', [SmartwatchController::class, 'index'])->name('smartwatchs.smartwatchs');
+Route::get('/smartwatches', [SmartwatchController::class, 'index'])->name('smartwatchs.smartwatchs')->middleware('auth'); ;
 // Create
 Route::get('/smartwatches/create', [SmartwatchController::class, 'create'])->name('create_smartwatchs');
 // Store
@@ -81,7 +81,7 @@ Route::put('/smartwatches/update/{id}', [SmartwatchController::class, 'update'])
 Route::delete('/smartwatches/{id}', [SmartwatchController::class, 'destroy'])->name('destroy_smartwatchs');
 
 //SMARTPHONES
-Route::get('/smartphones', [SmartphoneController::class, 'index'])->name('smartphones.smartphones');
+Route::get('/smartphones', [SmartphoneController::class, 'index'])->name('smartphones.smartphones')->middleware('auth'); ;
 // Create
 Route::get('/smartphones/create', [SmartphoneController::class, 'create'])->name('create_smartphones');
 // Store

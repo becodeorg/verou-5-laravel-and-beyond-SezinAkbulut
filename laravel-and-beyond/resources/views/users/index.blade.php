@@ -23,7 +23,7 @@
                         </a>
 
                         <div class="mt-4">
-                            <p class="font-bold text-orange-500">Categories created by {{ $user->name }}:</p>
+                            <p class="font-bold text-orange-500">Categories created by <br> {{ $user->name }}:</p>
                             <ul>
                                 @forelse($user->categories as $category)
                                     <li>
