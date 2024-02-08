@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use App\Models\Category;
-
 use App\Models\Product;
 
 class ProductController extends Controller
@@ -24,54 +23,96 @@ class ProductController extends Controller
         return view('show.home', compact('products', /*'popularTrendProducts'*/));
     }
 
+    public function show($category)
+    {
+        // Find the category by its name
+        $category = Category::where('name', $category)->first();
+
+        // If the category doesn't exist, handle it accordingly
+        if (!$category) {
+            return redirect()->route('categories.index')->with('error', 'Category not found.');
+        }
+
+        // Retrieve all products associated with the category
+        $products = Product::where('category_id', $category->id)->get();
+
+        // Pass the products and category to the view
+        return view('products.show', compact('products', 'category'));
+    }
+
     /**
      * Show the form for creating a new resource.
      */
-    public function create(Request $request)
+    public function create($category)
     {
-        $categories = Category::all();
-        return view('crud.create', [
-            "categories" => $categories
-        ]);
+        // Find the category by its name
+        $category = Category::where('name', $category)->first();
+
+        // If the category doesn't exist, handle it accordingly
+        if (!$category) {
+            return redirect()->route('categories.index')->with('error', 'Category not found.');
+        }
+
+        return view('products.create', compact('category'));
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+
+    public function store(Request $request, $category)
     {
-        //dd('Store method is called.');
-       // dd($request->all());
+        // Find the category by its name
+        $category = Category::where('name', $category)->first();
+
+        // If the category doesn't exist, handle it accordingly
+        if (!$category) {
+            return redirect()->route('categories.index')->with('error', 'Category not found.');
+        }
 
         $validatedData = $request->validate([
             'title' => 'required',
             'price' => 'required',
-            'category' => 'required',
             'photo' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);
-        //dd($validatedData);
 
         $product = new Product;
         $product->title = $validatedData['title'];
-        $product->category_id = $validatedData['category'];
         $product->price = $validatedData['price'];
         $product->user_id = auth()->user()->id;
+        $product->category_id = $category->id;
 
         // Store the image in the storage disk (public)
-        $posterPath = Storage::disk('public')->put('photos', $request->file('photo'));
-        // $posterPath = $request->file('photos')->store('photos');
-       // dd($posterPath);
-
-        // Update the image path in the database
-        $product->photo = $posterPath;
+        $photoPath = Storage::disk('public')->put('photos', $request->file('photo'));
+        $product->photo = $photoPath;
 
         // Save other fields
         $product->save();
-       // dd($product);
 
-        return redirect()->route('show.home')->with('success', 'Product created successfully!');
+        // Redirect to the store confirmation page
+        return view('products.store', compact('product', 'category'));
     }
 
+
+
+
+    /*
+        public function storeConfirmation($category)
+        {
+
+
+
+    // Find the category by its name
+            $category = Category::where('name', $category)->first();
+
+    // If the category doesn't exist, handle it accordingly
+            if (!$category) {
+                return redirect()->route('categories.index')->with('error', 'Category not found.');
+            }
+
+            return view('products.store', compact('category'));
+        }
+    */
 
     /**
      * Show the product for editing the specified resource.
@@ -165,9 +206,12 @@ class ProductController extends Controller
         return view('details.details', ['product' => $product]);
     }
 
-
+/*
     public function show(Category $category, Product $product) {
         return view('products.show', compact('category', 'product'));
     }
+*/
+
+
 
 }

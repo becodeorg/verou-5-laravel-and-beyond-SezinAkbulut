@@ -33,7 +33,9 @@
             <p><strong>Updated at:</strong> {{ $category->updated_at->format('F j, Y H:i:s') }}</p>
 
             <div class="mt-4">
-                <a href="{{ route('products.show', ['category' => $category]) }}" class="text-green-500 ml-2">Show Products</a>
+              {{-- <a href="{{ route('products.show', ['category' => $category]) }}" class="text-green-500 ml-2">Show Products</a>--}}
+                <a href="{{ route('products.show', ['category' => $category->name]) }}" class="text-green-500 ml-2">Show Products</a>
+
 
                 <a href="{{ route('categories.edit', ['category' => $category]) }}" class="text-blue-500">Update Category</a>
 

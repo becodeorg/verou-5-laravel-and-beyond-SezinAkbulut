@@ -34,10 +34,10 @@ Route::get('/', [HomeController::class, 'index'])->name('show.home');
 
 //CRUD PRODUCTS HOME PAGE
 // Create
-Route::get('/product/create', [ProductController::class, 'create'])->name('create')->middleware('auth');
+//Route::get('/product/create', [ProductController::class, 'create'])->name('create')->middleware('auth');
 
 // Store
-Route::post('/product/store', [ProductController::class, 'store'])->name('store');
+//Route::post('/product/store', [ProductController::class, 'store'])->name('store');
 // Edit
 Route::get('/product/{id}/edit', [ProductController::class, 'edit'])->name('edit');
 // Update
@@ -66,6 +66,13 @@ Route::delete('/categories/{category}', [CategoryController::class, 'destroy'])-
 //Route::get('/categories/{category}', [CategoryController::class, 'showProducts'])->name('categories.showProducts');
 Route::get('/categories/{category}', [CategoryController::class, 'show'])->name('categories.show')->middleware('auth'); //general
 Route::get('/categories/{category}/products', [ProductController::class, 'show'])->name('products.show')->middleware('auth'); //product of this category
+
+
+//PRODUCTS
+Route::get('/categories/{category}/products/create', [ProductController::class, 'create'])->name('products.create');
+Route::post('/categories/{category}/products/store', [ProductController::class, 'store'])->name('products.store');
+
+
 
 
 
