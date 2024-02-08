@@ -44,10 +44,29 @@
                         </div>
 
                         <br>
+                      {{--  <form action="{{ route('category.addToCart', ['category' => 'headphones', 'productId' => $headphone->id]) }}" method="post">
+                            @csrf
+                            <button class="bg-orange-500 text-white py-2 px-4 rounded-md" type="submit">Add to Cart</button>
+                        </form>
+                         <form action="{{ route('category.addToCart', ['category' => 'headphones', 'productId' => $headphone->id]) }}" method="post"     >
+                          @csrf
+                          <input type="hidden" name="productId" value="{{ $headphone->id }}">
+                            <button class="bg-orange-500 text-white py-2 px-4 rounded-md" type="submit">Add to Cart</button>
+                        </form>
+                        <form action="{{ route('category.addToCart', ['category' => 'headphones', 'productId' => $headphone->id]) }}" method="post">
+                            @csrf
+                            <button class="bg-orange-500 text-white py-2 px-4 rounded-md" type="submit">Add to Cart</button>
+                        </form>
+                        --}}
+                        <!-- Example for headphones -->
+
+
                         <form action="{{ route('headphones.addToCart', ['productId' => $headphone->id]) }}" method="post">
                             @csrf
                             <button class="bg-orange-500 text-white py-2 px-4 rounded-md" type="submit">Add to Cart</button>
                         </form>
+
+
                     </div>
                 </div>
                 <br>

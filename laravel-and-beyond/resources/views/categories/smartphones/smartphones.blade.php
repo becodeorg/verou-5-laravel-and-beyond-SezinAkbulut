@@ -42,7 +42,7 @@
                             </div>
                             <br>
 
-                            <form action="{{ route('$smartphones.addToCart', ['productId' => $smartphone->id]) }}" method="post">
+                            <form action="{{ route('category.addToCart', ['category' => 'smartphone', 'productId' => $smartphone->id]) }}" method="post">
                                 @csrf
                                 <button class="bg-orange-500 text-white py-2 px-4 rounded-md" type="submit">Add to Cart</button>
                             </form>

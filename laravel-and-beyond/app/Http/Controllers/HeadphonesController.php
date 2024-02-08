@@ -141,6 +141,7 @@ class HeadphonesController extends Controller
 
 
     //add to cart
+    /*
     public function addToCart(Request $request, $productId)
     {
         $product = Headphones::find($productId);
@@ -166,5 +167,5 @@ class HeadphonesController extends Controller
 
         return redirect()->back()->with('success', 'Product added to cart successfully.');
     }
-
+*/
 }

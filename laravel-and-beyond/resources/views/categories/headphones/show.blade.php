@@ -27,7 +27,7 @@
                     <p class="card-text">{{ $headphone->description }}</p>
                     <p class="card-text">{{ $headphone->price }}</p>
                     <br>
-                    <form action="{{ route('headphones.addToCart', ['productId' => $product->id]) }}" method="post">
+                    <form action="{{ route('category.addToCart', ['category' => 'headphones', 'productId' => $headphone->id]) }}" method="post">
                         @csrf
                         <button class="bg-orange-500 text-white py-2 px-4 rounded-md" type="submit">Add to Cart</button>
                     </form>

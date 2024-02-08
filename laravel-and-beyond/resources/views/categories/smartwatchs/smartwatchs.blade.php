@@ -35,14 +35,14 @@
                             <div class="card-body mt-6 text-light">
                                 <h5 class="card-title text-light text-2xl">{{ $smartwatch->title }}</h5>
                                 <!-- Display user information -->
-                                <p>Created by: {{ $headphone->user->name }}</p>
+                                <p>Created by: {{ $smartwatch->user->name }}</p>
                                 <!-- Display category information -->
-                                <p>Category: {{ $headphone->category ? $headphone->category->name : 'Uncategorized' }}</p>
+                                <p>Category: {{ $smartwatch->category ? $smartwatch->category->name : 'Uncategorized' }}</p>
                                 <br>
                                 <p>€{{ $smartwatch->price }}</p>
                             </div>
                             <br>
-                            <form action="{{ route('$smartwatches.addToCart', ['productId' => $smartwatch->id]) }}" method="post">
+                            <form action="{{ route('category.addToCart', ['category' => '$smartwatch', 'productId' => $smartwatch->id]) }}" method="post">
                                 @csrf
                                 <button class="bg-orange-500 text-white py-2 px-4 rounded-md" type="submit">Add to Cart</button>
                             </form>

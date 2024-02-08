@@ -46,9 +46,10 @@
                     </li>
 
                     <!--Cart-->
-                    <a href="{{ route('cart') }}" class="text-sm px-5 py-1 border rounded-full text-orange-500 focus:outline-none">
-                        <i class="fas fa-shopping-cart"></i> <!-- Font Awesome cart icon -->
+                    <a href="{{ route('cart.view') }}" class="text-orange-500 hover:text-gray-600 focus:outline-none text-sm px-5 py-1 border rounded-full ">
+                        <i class="fas fa-shopping-cart"></i> View Cart
                     </a>
+
                     <!--Day/Night Mode Toggle-->
                     <div class="mood px-5 ">
                         <label class="switch">

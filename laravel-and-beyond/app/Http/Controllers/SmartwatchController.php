@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Smartwatch;
+use App\Models\Category;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
@@ -10,10 +11,12 @@ class SmartwatchController extends Controller
 {
     public function index()
     {
-        $smartwatchs  = SmSmartwatch::with('category')->get();
+        $smartwatchs  = Smartwatch::with('category')->get();
 
         return view('categories.smartwatchs.smartwatchs', ['smartwatchs' => $smartwatchs]);
     }
+
+
     public function show($id)
     {
         $smartwatch = Smartwatch::find($id);
@@ -24,7 +27,12 @@ class SmartwatchController extends Controller
     //create and store method
     public function create(Request $request)
     {
-        return view('categories.smartwatchs.create_smartwatchs');
+
+        $currentCategory = Category::where('name', 'Smartwatches')->first();
+        $otherVariables =
+        $categories = Category::all();
+
+        return view('categories.smartwatchs.create_smartwatchs', compact('currentCategory', 'categories', 'otherVariables'));
     }
 
     public function store(Request $request)
