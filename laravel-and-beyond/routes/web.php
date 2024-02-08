@@ -74,6 +74,7 @@ Route::post('/categories/{category}/products', [ProductController::class, 'store
 Route::put('/categories/{category}/products/{product}', [ProductController::class, 'update'])->name('products.update');
 Route::get('/categories/{category}/products', [ProductController::class, 'show'])->name('products.show')->middleware('auth');
 Route::delete('/categories/{category}/products/{product}', [ProductController::class, 'destroy'])->name('products.destroy');
+Route::get('/categories/{category}/products/{product}', [ProductController::class, 'details'])->name('products.details');
 
 
 

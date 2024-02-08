@@ -9,7 +9,7 @@
     <br><br>
     <br><br>
 
-    <h1>Edit Product</h1>
+    <h1 class="text-3xl font-bold text-center mt-8 mb-6 text-orange-500">Edit Product</h1>
 
     <form action="{{ route('products.update', ['category' => $category->name, 'product' => $product->id]) }}" method="post" enctype="multipart/form-data" class="max-w-md mx-auto border border-gray-300 p-6 rounded-md">
         @csrf
@@ -34,4 +34,6 @@
 
         <button type="submit" class="bg-orange-500 text-white py-2 px-4 rounded-md">Update</button>
     </form>
+
+    <a href="{{ route('products.show', ['category' => $category->name]) }}" class="bg-gray-800 text-white py-2 px-4 rounded-md">Back to Products</a>
 @endsection

@@ -40,6 +40,8 @@ class ProductController extends Controller
         return view('products.show', compact('products', 'category'));
     }
 
+
+
     /**
      * Show the form for creating a new resource.
      */
@@ -92,7 +94,7 @@ class ProductController extends Controller
         // Redirect to the store confirmation page
         return view('products.store', compact('product', 'category'));
     }
-
+/*
     public function edit($category, $product)
     {
         $category = Category::where('name', $category)->first();
@@ -100,6 +102,23 @@ class ProductController extends Controller
 
         return view('products.edit', compact('category', 'product'));
     }
+*/
+    public function edit($category, $productId)
+    {
+        // Find the product by its ID
+        $product = Product::findOrFail($productId);
+
+        // Find the category by its name
+        $category = Category::where('name', $category)->first();
+
+        // If the product or category doesn't exist, handle it accordingly
+        if (!$product || !$category) {
+            return redirect()->route('categories.index')->with('error', 'Product or category not found.');
+        }
+
+        return view('products.edit', compact('product', 'category'));
+    }
+
 
 
     public function update(Request $request, $category, $product)
@@ -162,14 +181,22 @@ class ProductController extends Controller
         return view('search.search', ['products' => $products, 'query' => $query]);
     }
 
-    //Show details
-    public function showDetails($id)
+
+    public function details($category, $productId)
     {
-        $product = Product::find($id);
+        // Find the product by its ID
+        $product = Product::findOrFail($productId);
 
-        return view('details.details', ['product' => $product]);
+        // Find the category by its name
+        $category = Category::where('name', $category)->first();
+
+        // If the product or category doesn't exist, handle it accordingly
+        if (!$product || !$category) {
+            return redirect()->route('categories.show')->with('error', 'Product or category not found.');
+        }
+
+        return view('products.details', compact('product', 'category'));
     }
-
 /*
     public function show(Category $category, Product $product) {
         return view('products.show', compact('category', 'product'));
