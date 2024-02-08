@@ -65,14 +65,15 @@ Route::delete('/categories/{category}', [CategoryController::class, 'destroy'])-
 
 //Route::get('/categories/{category}', [CategoryController::class, 'showProducts'])->name('categories.showProducts');
 Route::get('/categories/{category}', [CategoryController::class, 'show'])->name('categories.show')->middleware('auth'); //general
-Route::get('/categories/{category}/products', [ProductController::class, 'show'])->name('products.show')->middleware('auth'); //product of this category
 
 
-//PRODUCTS
+// PRODUCTS
 Route::get('/categories/{category}/products/create', [ProductController::class, 'create'])->name('products.create');
-Route::post('/categories/{category}/products/store', [ProductController::class, 'store'])->name('products.store');
-
-
+Route::get('/categories/{category}/products/{product}/edit', [ProductController::class, 'edit'])->name('products.edit');
+Route::post('/categories/{category}/products', [ProductController::class, 'store'])->name('products.store');
+Route::put('/categories/{category}/products/{product}', [ProductController::class, 'update'])->name('products.update');
+Route::get('/categories/{category}/products', [ProductController::class, 'show'])->name('products.show')->middleware('auth');
+Route::delete('/categories/{category}/products/{product}', [ProductController::class, 'destroy'])->name('products.destroy');
 
 
 

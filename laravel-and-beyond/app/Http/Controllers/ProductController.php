@@ -93,100 +93,64 @@ class ProductController extends Controller
         return view('products.store', compact('product', 'category'));
     }
 
-
-
-
-    /*
-        public function storeConfirmation($category)
-        {
-
-
-
-    // Find the category by its name
-            $category = Category::where('name', $category)->first();
-
-    // If the category doesn't exist, handle it accordingly
-            if (!$category) {
-                return redirect()->route('categories.index')->with('error', 'Category not found.');
-            }
-
-            return view('products.store', compact('category'));
-        }
-    */
-
-    /**
-     * Show the product for editing the specified resource.
-     */
-    public function edit($id)
+    public function edit($category, $product)
     {
-        $product = Product::findOrFail($id);
-        $products = Product::all();
+        $category = Category::where('name', $category)->first();
+        $product = Product::findOrFail($product);
 
-        return view('crud.edit', compact('product', 'products'));
+        return view('products.edit', compact('category', 'product'));
     }
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, $id)
+
+
+    public function update(Request $request, $category, $product)
     {
-        // Validation
-        $request->validate([
-            'title' => 'required|string|max:255',
-            'price' => 'required|string',
-            'photo' => 'image|mimes:jpeg,png,jpg,gif|max:2048',
+        $category = Category::where('name', $category)->first();
+        $product = Product::findOrFail($product);
+
+        $validatedData = $request->validate([
+            'title' => 'required',
+            'price' => 'required',
+            'photo' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);
 
-        // Update product based on $id
-        $product = Product::findOrFail($id);
+        $product->title = $validatedData['title'];
+        $product->price = $validatedData['price'];
 
-        // Update fields
-        $product->update([
-            'title' => $request->input('title'),
-            'price' => $request->input('price'),
-        ]);
-
-        // Handle photo update
+        // Update the product's photo if a new one is provided
         if ($request->hasFile('photo')) {
-            // Delete old photo if it exists
+            // Delete the old photo if it exists
             if ($product->photo) {
                 Storage::disk('public')->delete($product->photo);
             }
 
-            // Store the new photo in the storage disk
-            $posterPath = Storage::disk('public')->put('photo', $request->file('photo'));
-
-            // Update the photo path in the database
+            // Store the new photo
+            $posterPath = Storage::disk('public')->put('photos', $request->file('photo'));
             $product->photo = $posterPath;
-            $product->save();
         }
 
-        return redirect()->route('show.home')->with('success', 'Product updated successfully!');
+        // Save the changes
+        $product->save();
+
+        return redirect()->route('products.show', ['category' => $category->name])->with('success', 'Product updated successfully.');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy($id)
+    public function destroy($category, $product)
     {
-        $product = Product::findOrFail($id);
+        $category = Category::where('name', $category)->first();
+        $product = Product::findOrFail($product);
 
-        // Retrieve the deleted product for display on the home page
-        $deletedMovie = $product->toArray();
+        // Delete the product's photo if it exists
+        if ($product->photo) {
+            Storage::disk('public')->delete($product->photo);
+        }
 
-        // Remove the product from the database
+        // Delete the product
         $product->delete();
 
-        // Check if there are deleted product in the session
-        $deletedProducts = session('deletedProduct', []);
-
-        // Add the deleted product to the list
-        $deletedProducts[$id] = $deletedProducts;
-
-        // Update the movies and deleted movies in the session
-        session(['deletedProducts' => $deletedProducts]);
-
-        // Redirect to home page with success message
-        return redirect()->route('show.home')->with('success', 'Products deleted successfully!');
+        return redirect()->route('products.show', ['category' => $category->name])->with('success', 'Product deleted successfully.');
     }
 
    //Search method

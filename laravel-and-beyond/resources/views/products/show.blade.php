@@ -25,7 +25,15 @@
                       <p>Created by: {{ $product->user->name }}</p>
                       <p>Category: {{ $category->name }}</p>
                 </div>
-                <!-- Add other product details as needed -->
+
+                <div class="mt-4">
+                    <a href="{{ route('products.show', ['category' => $category->name, 'product' => $product->id]) }}" class="text-blue-500">Details</a>
+                    <a href="{{ route('products.edit', ['category' => $category->name, 'product' => $product->id]) }}" class="text-orange-500 ml-4">Update</a>
+                    <form action="{{ route('products.destroy', ['category' => $category->name, 'product' => $product->id]) }}" method="post" class="inline-block">
+                        @csrf
+                        @method('DELETE')
+                        <button type="submit" onclick="return confirm('Are you sure you want to delete this product?')" class="bg-red-500 text-white py-2 px-4 rounded-md">Delete</button>
+                    </form>
             </div>
         @empty
             <p class="text-gray-500">No products found for this category.</p>
