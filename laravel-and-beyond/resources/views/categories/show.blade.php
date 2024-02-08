@@ -1,8 +1,57 @@
 
-<h1>Products in {{ $category->name }}</h1>
+{{--<h1>Products in {{ $category->name }}</h1>
 @foreach($products as $product)
     <a href="{{ route('products.show', ['category' => $category->id, 'product' => $product->id]) }}">{{ $product->name }}</a>
 @endforeach
+--}}
+
+
+
+@extends('layouts.app')
+
+@section('title', 'Category Details')
+
+@section('content')
+    <br><br>
+    <br><br>
+    <br><br>
+    <br><br>
+    <br><br>
+    <br><br>
+    <br><br>
+
+    <div class="container">
+        <h1 class="text-3xl font-bold text-center mt-8 mb-6 text-orange-500">{{ $category->name }}</h1>
+
+        <div class="border border-gray-300 p-6 rounded-md mb-4 flex flex-col items-center">
+            @if($category->photo)
+                <img src="{{ asset('storage/' . $category->photo) }}" alt="{{ $category->name }}" class="mb-2 rounded-md" width="150" height="150">
+            @endif
+            <p><strong>Name:</strong> {{ $category->name }}</p>
+            <p><strong>Created by:</strong> {{ $category->user->name }}</p>
+            <p><strong>Created at:</strong> {{ $category->created_at->format('F j, Y H:i:s') }}</p>
+            <p><strong>Updated at:</strong> {{ $category->updated_at->format('F j, Y H:i:s') }}</p>
+
+            <div class="mt-4">
+                <a href="{{ route('products.show', ['category' => $category]) }}" class="text-green-500 ml-2">Show Products</a>
+
+                <a href="{{ route('categories.edit', ['category' => $category]) }}" class="text-blue-500">Update Category</a>
+
+                <form action="{{ route('categories.destroy', ['category' => $category]) }}" method="post" class="inline-block">
+                    @csrf
+                    @method('DELETE')
+                    <button type="submit" class="text-red-500">Delete Category</button>
+                </form>
+            </div>
+        </div>
+
+        <div class="mt-4">
+            <a href="{{ route('categories.index') }}" class="text-gray-500">&larr; Back to Categories</a>
+        </div>
+    </div>
+@endsection
+
+
 
 {{--
 

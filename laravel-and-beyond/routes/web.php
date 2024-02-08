@@ -50,11 +50,25 @@ Route::get('/search', [ProductController::class, 'search'])->name('search')->mid
 Route::get('/product/{id}', [ProductController::class, 'showDetails'])->name('details');
 
 
+
 //CATEGORIES
+Route::get('/categories', [CategoryController::class, 'index'])->name('categories.index'); //categories pages
+
+//CRUD CATEGORY
+Route::group(['prefix' => 'categories', 'middleware' => 'auth'], function () {
+    Route::get('/create', [CategoryController::class, 'create'])->name('categories.create');
+    Route::post('/store', [CategoryController::class, 'store'])->name('categories.store');
+    Route::put('/{category}', [CategoryController::class, 'update'])->name('categories.update');
+    Route::get('/{category}/edit', [CategoryController::class, 'edit'])->name('categories.edit');
+});
+Route::delete('/categories/{category}', [CategoryController::class, 'destroy'])->name('categories.destroy');
 
 //Route::get('/categories/{category}', [CategoryController::class, 'showProducts'])->name('categories.showProducts');
 Route::get('/categories/{category}', [CategoryController::class, 'show'])->name('categories.show')->middleware('auth'); //general
-Route::get('/categories/{category}/products/{product}', [ProductController::class, 'show'])->name('products.show')->middleware('auth'); //product of this category
+Route::get('/categories/{category}/products', [ProductController::class, 'show'])->name('products.show')->middleware('auth'); //product of this category
+
+
+
 
 //HEADPHONES
 

@@ -108,7 +108,7 @@
             Shop Now
         </a>
         <!--Shop Now Button-->
-        <a href="{{ route('create') }}" class="border border-orange-500 text-orange-500 rounded-md py-2 px-4 top-52 left-32 mt-48 ml-28 inline-block float-left absolute">
+        <a href="{{ route('categories.create') }}" class="border border-orange-500 text-orange-500 rounded-md py-2 px-4 top-52 left-32 mt-48 ml-28 inline-block float-left absolute">
             Add New Category
         </a>
 
