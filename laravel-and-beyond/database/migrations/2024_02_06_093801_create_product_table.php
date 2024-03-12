@@ -21,6 +21,7 @@ return new class extends Migration
              $table->foreignId('category_id')->constrained('headphones')->onDelete('cascade'); */
             $table->unsignedBigInteger('category_id')->constrained();
             $table->unsignedBigInteger('user_id');
+            $table->boolean('popular_trend')->default(false);
             /*
             $table->foreignId('category_id')->constrained();
             $table->foreignId('user_id');

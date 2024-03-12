@@ -192,7 +192,8 @@ class ProductController extends Controller
 
         // If the product or category doesn't exist, handle it accordingly
         if (!$product || !$category) {
-            return redirect()->route('categories.show')->with('error', 'Product or category not found.');
+            return redirect()->route('categories.show', ['category' => $category])->with('error', 'Product or category not found.');
+
         }
 
         return view('products.details', compact('product', 'category'));

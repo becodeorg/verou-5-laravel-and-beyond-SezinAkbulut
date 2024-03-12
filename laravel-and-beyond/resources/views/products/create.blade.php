@@ -37,9 +37,8 @@
     </form>
 
     <br>
-    <div class="text-center mt-4">
-        <button class="bg-gray-800 text-white py-2 px-4 rounded-md" onclick="window.location.href='{{ route('show.home') }}'">Back</button>
-    </div>
+
+    <a href="{{ route('products.show', ['category' => $category->name]) }}" class="bg-gray-800 text-white py-2 px-4 rounded-md">Back to Products</a>
 @endsection
 
 

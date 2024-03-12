@@ -2,9 +2,6 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProductController;
-use App\Http\Controllers\HeadphonesController;
-use App\Http\Controllers\SmartwatchController;
-use App\Http\Controllers\SmartphoneController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\UserController;
@@ -31,7 +28,7 @@ Route::get('/', [HomeController::class, 'index'])->name('show.home');
 
 //Route::get('/', [ProductController::class, 'index'])->name('show.home');
 
-
+Route::get('/get-random-product', [HomeController::class, 'getRandomProduct'])->name('get-random-product');
 //CRUD PRODUCTS HOME PAGE
 // Create
 //Route::get('/product/create', [ProductController::class, 'create'])->name('create')->middleware('auth');
@@ -63,8 +60,9 @@ Route::group(['prefix' => 'categories', 'middleware' => 'auth'], function () {
 });
 Route::delete('/categories/{category}', [CategoryController::class, 'destroy'])->name('categories.destroy');
 
-//Route::get('/categories/{category}', [CategoryController::class, 'showProducts'])->name('categories.showProducts');
+
 Route::get('/categories/{category}', [CategoryController::class, 'show'])->name('categories.show')->middleware('auth'); //general
+
 
 
 // PRODUCTS
@@ -79,71 +77,17 @@ Route::get('/categories/{category}/products/{product}', [ProductController::clas
 
 
 
-//HEADPHONES
+//CART
 
-Route::get('/headphones', [HeadphonesController::class, 'index'])->name('headphones.headphones')->middleware('auth');
-// Create
-Route::get('/headphones/create', [HeadphonesController::class, 'create'])->name('create_headphones');
-// Store
-Route::post('/headphones/store', [HeadphonesController::class, 'store'])->name('store_headphones');
-//Show details
-Route::get('/headphones/{id}', [HeadphonesController::class, 'show'])->name('headphones.show');
-// Edit
-Route::get('/headphones/{id}/edit', [HeadphonesController::class, 'edit'])->name('edit_headphones');
-// Update
-Route::put('/headphones/update/{id}', [HeadphonesController::class, 'update'])->name('update.headphones');
-// Delete
-Route::delete('/headphones/{id}', [HeadphonesController::class, 'destroy'])->name('destroy_headphones');
+Route::get('/cart', [CartController::class, 'index'])->name('cart.index');
+Route::post('/cart/add/{product}', [CartController::class, 'addToCart'])->name('cart.addToCart');
+Route::delete('/cart/remove/{cartItem}', [CartController::class, 'removeFromCart'])->name('cart.remove');
+Route::get('/cart/show', [CartController::class, 'show'])->name('cart.show');
+Route::put('/cart/{rowId}',  [CartController::class, 'update'])->name('cart.update');
+
+Route::get('/checkout', [CartController::class, 'checkout'])->name('checkout');
 
 
-
-// Routes for managing cart items related to headphones
-Route::post('/headphones/add-to-cart/{productId}', [CartController::class, 'addToCart'])->name('headphones.addToCart');
-Route::get('/headphones/view-cart', [CartController::class, 'viewCart'])->name('headphones.viewCart');
-// Add more routes for removing items, updating quantities, etc. if needed
-
-
-
-//SMARTWATCHES
-
-Route::get('/smartwatches', [SmartwatchController::class, 'index'])->name('smartwatchs.smartwatchs')->middleware('auth');
-// Create
-Route::get('/smartwatches/create', [SmartwatchController::class, 'create'])->name('create_smartwatchs');
-// Store
-Route::post('/smartwatches/store', [SmartwatchController::class, 'store'])->name('store_smartwatchs');
-//Show details
-Route::get('/smartwatches/{id}', [SmartwatchController::class, 'show'])->name('smartwatchs.show');
-// Edit
-Route::get('/smartwatches/{id}/edit', [SmartwatchController::class, 'edit'])->name('edit_smartwatchs');
-// Update
-Route::put('/smartwatches/update/{id}', [SmartwatchController::class, 'update'])->name('update_smartwatchs');
-// Delete
-Route::delete('/smartwatches/{id}', [SmartwatchController::class, 'destroy'])->name('destroy_smartwatchs');
-
-// Routes for managing cart items related to other categories
-Route::post('/smartwatches/add-to-cart/{productId}', [CartController::class, 'addToCart'])->name('smartwatches.addToCart');
-Route::get('/smartwatches/view-cart', [CartController::class, 'viewCart'])->name('smartwatches.viewCart');
-
-
-//SMARTPHONES
-Route::get('/smartphones', [SmartphoneController::class, 'index'])->name('smartphones.smartphones')->middleware('auth');
-// Create
-Route::get('/smartphones/create', [SmartphoneController::class, 'create'])->name('create_smartphones');
-// Store
-Route::post('/smartphones/store', [SmartphoneController::class, 'store'])->name('store_smartphones');
-//Show details
-Route::get('/smartphones/{id}', [SmartphoneController::class, 'show'])->name('smartphones.show');
-// Edit
-Route::get('/smartphones/{id}/edit', [SmartphoneController::class, 'edit'])->name('edit_smartphones');
-// Update
-Route::put('/smartphones/update/{id}', [SmartphoneController::class, 'update'])->name('update_smartphones');
-// Delete
-Route::delete('/smartphones/{id}', [SmartphoneController::class, 'destroy'])->name('destroy_smartphones');
-
-
-// Routes for managing cart items related to other categories
-Route::post('/smartphones/add-to-cart/{productId}', [CartController::class, 'addToCart'])->name('smartphones.addToCart');
-Route::get('/smartphones/view-cart', [CartController::class, 'viewCart'])->name('smartphones.viewCart');
 
 
 //REGISTER
@@ -164,9 +108,7 @@ Route::post('/logout', [LoginController::class, 'destroy'])->name('logout');
 Route::get("/register", [RegisterController::class, 'index'])->name("showRegister");
 Route::post("/register", [RegisterController::class, 'create'])->name("handleRegister");
 
-//CART
-// Display cart items
-Route::get('/cart', [CartController::class, 'index'])->name('cart');
+
 
 // Add a product to the cart
 //Route::post('/cart/add', [CartController::class, 'addToCart'])->name('cart.add');
@@ -180,10 +122,12 @@ Route::get('/cart', [CartController::class, 'index'])->name('cart');
 });
  */
 
-
+/*
 // CART
 Route::get('/cart', [CartController::class, 'viewCart'])->name('cart.view');
 Route::post('/cart/add/{category}/{productId}', [CartController::class, 'addToCart'])->name('cart.addToCart');
+*/
+
 
 // Routes for managing cart items related to headphones
 //Route::post('/{category}/add-to-cart/{productId}', [CartController::class, 'addToCart'])->name('category.addToCart');
@@ -191,15 +135,4 @@ Route::post('/cart/add/{category}/{productId}', [CartController::class, 'addToCa
 // Add more routes for removing items, updating quantities, etc. if needed
 
 
-// Assuming you already have a route group for products
-Route::prefix('products')->group(function () {
-    // Headphones routes
-    Route::get('/headphones/{id}/addToCart', [CartController::class, 'addToCart'])->name('addToCart.headphones');
-
-    // Smartphones routes
-    Route::get('/smartphones/{id}/addToCart', [CartController::class, 'addToCart'])->name('addToCart.smartphones');
-
-    // Smartwatches routes
-    Route::get('/smartwatches/{id}/addToCart', [CartController::class, 'addToCart'])->name('addToCart.smartwatches');
-});
 

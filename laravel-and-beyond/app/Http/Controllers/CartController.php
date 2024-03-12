@@ -2,65 +2,74 @@
 
 namespace App\Http\Controllers;
 
+use Gloudemans\Shoppingcart\Facades\Cart;
 use Illuminate\Http\Request;
-use App\Models\Headphones;
-use App\Models\Smartwatch;
-use App\Models\Smartphone;
+use App\Models\Product;
+use Illuminate\Support\Facades\Session;
 
 class CartController extends Controller
 {
-    public function viewCart()
-    {
-        // Retrieve cart items from the session
-        $cartItems = session('cart', []);
 
-        return view('cart.view', compact('cartItems'));
+
+    public function index()
+    {
+        // Retrieve cart items
+        $cartItems = Cart::content();
+
+        // Calculate total price
+        $total = Cart::subtotal();
+
+        // Retrieve cart count from session
+        $cartItemsCount = Session::get('cartItemsCount', 0);
+
+        return view('cart.index', compact('cartItems', 'total', 'cartItemsCount'));
     }
 
-    public function addToCart(Request $request, $category, $productId)
+
+
+    public function show()
     {
-        // Your logic to determine the category based on the route
-        $category = $request->route()->getName(); // This assumes your route names correspond to categories
+        $cartItems = Cart::content();
+        $totalPriceExcludingTax = Cart::subtotal();
 
-        // Your logic to determine the model based on the category
-        switch ($category) {
-            case 'headphones':
-                $product = Headphones::find($productId);
-                break;
-            case 'smartwatches':
-                $product = Smartwatch::find($productId);
-                break;
-            case 'smartphones':
-                $product = Smartphone::find($productId);
-                break;
-            default:
-                // Handle unknown category
-                return redirect()->back()->with('error', 'Unknown category.');
-        }
+        return view('cart.show', compact('cartItems', 'totalPriceExcludingTax'));
+    }
 
-        if (!$product) {
-            // Handle product not found
-            return redirect()->back()->with('error', 'Product not found.');
-        }
+    public function addToCart(Request $request, Product $product)
+    {
+        $quantity = $request->input('quantity', 1);
+        $productDetails = Product::findOrFail($product->id);
 
+        Cart::add([
+            'id' => $productDetails->id,
+            'name' => $productDetails->title,
+            'price' => $productDetails->price,
+            'qty' => $quantity,
+            'options' => [
+                'photo' => $productDetails->photo,
+                'category' => $productDetails->category->name,
+            ],
+        ]);
 
-        // Get the current cart from the session or create an empty array
-        $cart = session('cart', []);
+        return redirect()->route('cart.index')->with('success', 'Product added to cart.');
+    }
 
-        // Add the product to the cart, including the category information
-        $cart[] = [
-            'id' => $productId,
-            'category' => $category,
-            'title' => $product->title,
-            'price' => $product->price,
-            'photo' => $product->photo,
-            // Add other product details as needed
-        ];
+    public function removeFromCart($rowId)
+    {
+        Cart::remove($rowId);
+        return redirect()->route('cart.index')->with('success', 'Product removed from cart.');
+    }
 
-        // Store the updated cart in the session
-        session(['cart' => $cart]);
+    public function checkout()
+    {
+        Cart::destroy();
+        return redirect()->route('cart.index')->with('success', 'Checkout successful. Your cart is now empty.');
+    }
 
-        return redirect()->back()->with('success', 'Product added to cart successfully.');
+    public function update(Request $request, $rowId)
+    {
+        Cart::update($rowId, $request->quantity);
+
+        return redirect()->route('cart.index')->with('success', 'Cart updated successfully.');
     }
 }
-

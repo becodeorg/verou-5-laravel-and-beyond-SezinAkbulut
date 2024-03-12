@@ -34,12 +34,8 @@
         </div>
     </div>
 
-
-    <form action="{{ route('categories.destroy', ['category' => $category]) }}" method="post" class="inline-block">
-        @csrf
-        @method('DELETE')
-
-        <button class="text-red-500" type="submit" onclick="return confirm('Are you sure you want to delete this category?')">Delete Category</button>
-    </form>
+    <div class="mt-4">
+        <a href="{{ route('categories.index') }}" class=" bg-gray-800 text-white py-2 px-4 rounded-md">&larr; Back to Categories</a>
+    </div>
 @endsection
 

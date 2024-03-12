@@ -1,8 +1,10 @@
 <?php
 
 namespace App\Http\Controllers;
+
 use App\Models\Product;
 use App\Models\Category;
+use Illuminate\Support\Facades\DB;
 
 use Illuminate\Http\Request;
 
@@ -14,9 +16,40 @@ class HomeController extends Controller
     public function index()
     {
         $categories = Category::all();
+        $popularTrendProducts = Product::popularTrend()->get();
+        $randomProduct = Product::inRandomOrder()->first();
 
-        return view('show.home', compact('categories'));
+
+        $remainingTime = [
+            'hours' => 3, // Replace with the actual remaining hours
+            'minutes' => 0,
+            'seconds' => 0,
+        ];
+
+        $remainingTimeInSeconds = $remainingTime['hours'] * 3600 + $remainingTime['minutes'] * 60 + $remainingTime['seconds'];
+
+        return view('show.home', compact('categories', 'popularTrendProducts', 'randomProduct', 'remainingTimeInSeconds'));
+
     }
+
+    public function search(Request $request)
+    {
+        $query = $request->input('query');
+        $products = Product::where('title', 'like', "%$query%")->get();
+
+        return view('search.search', ['products' => $products, 'query' => $query]);
+    }
+
+
+    public function getRandomProduct()
+    {
+        // Your logic to get a new random product
+        $newRandomProduct = Product::inRandomOrder()->first();// ...
+
+    // Return a JSON response
+    return response()->json($newRandomProduct);
+}
+
 
     /**
      * Show the form for creating a new resource.

@@ -34,21 +34,21 @@
 
             <div class="mt-4">
               {{-- <a href="{{ route('products.show', ['category' => $category]) }}" class="text-green-500 ml-2">Show Products</a>--}}
-                <a href="{{ route('products.show', ['category' => $category->name]) }}" class="text-green-500 ml-2">Show Products</a>
+                <a href="{{ route('products.show', ['category' => $category->name]) }}" class="bg-orange-500 text-white py-2 px-4 rounded-md">Show Products</a>
 
 
-                <a href="{{ route('categories.edit', ['category' => $category]) }}" class="text-blue-500">Update Category</a>
+                <a href="{{ route('categories.edit', ['category' => $category]) }}" class="bg-green-500 text-white py-2 px-4 rounded-md">Update Category</a>
 
                 <form action="{{ route('categories.destroy', ['category' => $category]) }}" method="post" class="inline-block">
                     @csrf
                     @method('DELETE')
-                    <button type="submit" class="text-red-500">Delete Category</button>
+                    <button type="submit" class="bg-red-500 text-white py-2 px-4 rounded-md">Delete Category</button>
                 </form>
             </div>
         </div>
 
         <div class="mt-4">
-            <a href="{{ route('categories.index') }}" class="text-gray-500">&larr; Back to Categories</a>
+            <a href="{{ route('categories.index') }}" class=" bg-gray-800 text-white py-2 px-4 rounded-md">&larr; Back to Categories</a>
         </div>
     </div>
 @endsection

@@ -18,12 +18,12 @@
         @else
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
                 @foreach($products as $product)
-                    <div class="card bg-dark mb-3 ">
-                        <img src="{{ asset('storage/' . $product->photo) }}" class="card-img-top custom-thumbnail mx-auto mt-4" alt="{{ $product->title }}">
+                    <div class="card bg-dark mb-3">
+                        <img src="{{ asset('storage/' . $product->photo) }}" class="card-img-top custom-thumbnail mx-auto mt-4" style="width: 150px; height: 150px" alt="{{ $product->title }}">
                         <div class="card-body">
                             <h5 class="card-title text-3xl mt-2 text-light">{{ $product->title }}</h5>
                             <br>
-                            <a href="{{ route('details', ['id' => $product->id]) }}" class="bg-orange-500 text-white py-2 px-4 rounded-md">Details</a>
+                            <a href="{{ route('products.details', ['category' => $product->category->name, 'product' => $product->id]) }}" class="bg-orange-500 text-white py-2 px-4 rounded-md">Details</a>
                         </div>
                     </div>
                 @endforeach

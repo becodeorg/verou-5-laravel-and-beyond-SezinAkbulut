@@ -31,7 +31,6 @@
             </div>
         </div>
 
-        <!-- Add a back button to return to the product listing -->
         <a href="{{ route('products.show', ['category' => $category->name]) }}" class="bg-gray-800 text-white py-2 px-4 rounded-md">Back to Products</a>
     </div>
 @endsection

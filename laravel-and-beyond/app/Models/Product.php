@@ -28,10 +28,18 @@ class Product extends Model
     // Timestamps
     public $timestamps = true;
 
+    public function scopePopularTrend($query)
+    {
+        return $query->where('popular_trend', true);
+    }
+
+
    /* public function category()
     {
         return $this->belongsTo(Category::class);
     }
+
+
    */
     /*
     public function category()

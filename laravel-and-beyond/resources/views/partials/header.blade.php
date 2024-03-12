@@ -21,42 +21,58 @@
                         <a href="{{ route('show.home') }}" class="px-3 text-light" >Home</a>
                     </li>
 
-                    <!-- Dropdown menu for Categories -->
-                    <div class="relative inline-block text-left group">
-                        <button type="button" class="inline-flex items-center px-2 py-1 border border-transparent text-sm font-medium rounded-md text-white bg-orange-500 hover:bg-orange-900 focus:outline-none focus:ring focus:border-orange-500 active:bg-orange-900">
-                            Categories
-                            <svg class="w-4 h-4 ml-2 -mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
-                            </svg>
-                        </button>
-
-                        <div class="hidden group-hover:block absolute right-0 mt-2 w-40 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5">
-                            <div class="py-1" role="menu" aria-orientation="vertical" aria-labelledby="options-menu">
-                                <a href="{{ route('headphones.headphones') }}" class="block px-4 py-2 text-sm text-orange-500 hover:bg-gray-100 hover:text-gray-900" role="menuitem">Headphones</a>
-                                <a href="{{ route('smartwatchs.smartwatchs') }}" class="block px-4 py-2 text-sm text-orange-500 hover:bg-gray-100 hover:text-gray-900" role="menuitem">Smartwatches</a>
-                                <a href="{{ route('smartphones.smartphones') }}" class="block px-4 py-2 text-sm text-orange-500 hover:bg-gray-100 hover:text-gray-900" role="menuitem">Smartphones</a>
-                            </div>
-                        </div>
-                    </div>
-
-
+                    <li>
+                        <a href="{{ route('categories.index') }}" class="px-3 text-light">Explore</a>
+                    </li>
 
                     <li>
                         <a href="{{ route('showUsers') }}" class="px-3 text-light">Users</a>
                     </li>
 
+
                     <!--Cart-->
-                    <a href="{{ route('cart.view') }}" class="text-orange-500 hover:text-gray-600 focus:outline-none text-sm px-5 py-1 border rounded-full ">
-                        <i class="fas fa-shopping-cart"></i> View Cart
-                    </a>
+               {{--      <div class="cart-icon">
+                         <a href="{{ route('cart.show') }}" id="cart-dropdown-toggle" class="text-orange-500 hover:text-gray-600 focus:outline-none text-sm px-5 py-1 border rounded-full ">
+                             <i class="fas fa-shopping-cart"></i> View Cart
+                        </a>
+                    </div>
+
+
+
+
+                     <div class="cart-icon">
+                        <a @click="isOpen = !isOpen"  href="{{ route('cart.show') }}" class="text-orange-500 hover:text-gray-600 focus:outline-none text-sm px-5 py-1 border rounded-full">
+                            <i class="fas fa-shopping-cart"></i> View Cart
+                        </a>
+                    </div>
+                    --}}
+
+                    <div class="cart-icon">
+                        <a href="{{ route('cart.index') }}" class="text-orange-500 hover:text-gray-600 focus:outline-none text-sm px-5 py-1 border rounded-full">
+                            <i class="fas fa-shopping-cart"></i> View Cart
+                            <!-- Display cart items count -->
+                            @if(isset($cartItemsCount) && $cartItemsCount > 0)
+                                <span class="badge badge-pill badge-primary">{{ $cartItemsCount }}</span>
+                            @endif
+                        </a>
+                    </div>
+
+
+
+                    <!--Cart-->
+
+
+
 
                     <!--Day/Night Mode Toggle-->
+
                     <div class="mood px-5 ">
                         <label class="switch">
                             <input type="checkbox" id="toggle-mode">
                             <span class="slider round" id="slider"></span>
                         </label>
                     </div>
+
                 </ul>
 
 
@@ -104,7 +120,7 @@
         </h1>
         <br>
         <!--Shop Now Button-->
-        <a href="#" class="bg-orange-500 text-white rounded-md py-2 px-4 top-52 mt-48 ml-28 inline-block float-left absolute">
+        <a href="{{ route('categories.index') }}" class="bg-orange-500 text-white rounded-md py-2 px-4 top-52 mt-48 ml-28 inline-block float-left absolute">
             Shop Now
         </a>
         <!--Shop Now Button-->
@@ -114,7 +130,7 @@
 
     </div>
     <!--Scroll down button-->
-    <a href="#products" class="text-4xl bottom-28 left-40 transform -translate-x-1/2 -translate-y-1/2 text-dark absolute hover:text-orange-500 cursor-pointer">
+    <a href="{{ url('/#popularTrends') }}" class="text-4xl bottom-28 left-40 transform -translate-x-1/2 -translate-y-1/2 text-dark absolute hover:text-orange-500 cursor-pointer">
         <i class="fas fa-chevron-down"></i>
     </a>
 

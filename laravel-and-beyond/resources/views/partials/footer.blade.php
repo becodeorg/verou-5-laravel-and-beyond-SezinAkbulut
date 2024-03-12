@@ -61,15 +61,15 @@
             <div class="flex space-x-4">
                 <a href="#" target="_blank" rel="noopener noreferrer">
                     <!-- Instagram Icon -->
-                    <img src="path/to/instagram-icon.png" alt="Instagram" class="h-6 w-6">
+                    <img src="images/600px-Instagram_icon.png" alt="Instagram" class="h-6 w-6">
                 </a>
                 <a href="#" target="_blank" rel="noopener noreferrer">
                     <!-- Facebook Icon -->
-                    <img src="path/to/facebook-icon.png" alt="Facebook" class="h-6 w-6">
+                    <img src="images/240px-Facebook_logo_square.png" alt="Facebook" class="h-6 w-6">
                 </a>
                 <a href="#" target="_blank" rel="noopener noreferrer">
                     <!-- LinkedIn Icon -->
-                    <img src="path/to/linkedin-icon.png" alt="LinkedIn" class="h-6 w-6">
+                    <img src="images/480px-LinkedIn_logo_initials.png" alt="LinkedIn" class="h-6 w-6">
                 </a>
             </div>
         </div>

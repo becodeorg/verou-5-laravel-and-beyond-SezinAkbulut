@@ -31,4 +31,8 @@
         </div>
     </div>
 
+    <div class="mt-4">
+        <a href="{{ route('categories.index') }}" class=" bg-gray-800 text-white py-2 px-4 rounded-md">&larr; Back to Categories</a>
+    </div>
+
 @endsection

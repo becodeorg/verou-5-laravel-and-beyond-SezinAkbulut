@@ -15,19 +15,30 @@
     <br> <br> <br> <br>
     <div class="flex flex-wrap">
         @forelse($products as $product)
-            <div class="card object-top glass-effect mx-auto p-6 rounded-md mb-4 text-center">
-                <img src="{{ asset('storage/' . $product->photo) }}" alt="{{ $product->title }}" class="card-img-top custom-thumbnail mx-auto mt-4">
+            <div class="card object-top glass-effect mx-auto p-6 rounded-md mb-4">
+                <img src="{{ asset('storage/' . $product->photo) }}" alt="{{ $product->title }}" class="card-img-top custom-thumbnail mx-auto mt-4" style="width: 150px; height: 150px;">
                 <div class="card-body mt-6 text-dark">
                     <h2 class="card-title text-2xl">{{ $product->title }}</h2>
                     <p>Price: €{{ $product->price }}</p>
+                    <p>Created by: {{ $product->user->name }}</p>
+                    <p>Category: {{ $category->name }}</p>
                 </div>
                 <div class="mt-4">
-                    <a href="{{ route('products.details', ['category' => $category->name, 'product' => $product->id]) }}" class="text-blue-500">Details</a>
+                    <a href="{{ route('products.details', ['category' => $category->name, 'product' => $product->id]) }}" class="bg-blue-500 text-white py-2 px-4 rounded-md">Details</a>
+                </div>
+                {{-- Add to Cart Button --}}
+                <div class="mt-4">
+                    <form action="{{ route('cart.addToCart', ['product' => $product]) }}" method="post">
+                        @csrf
+                        <button type="submit" class="bg-green-500 text-white py-2 px-4 rounded-md">Add to Cart</button>
+                    </form>
                 </div>
             </div>
         @empty
-            <p class="text-gray-500">No products found for this category.</p>
+            <p class="text-gray-500 text-center">No products found for this category.</p>
         @endforelse
     </div>
-@endsection
+    <br> <br>
 
+    <a href="{{ route('categories.index', ['category' => $category->name]) }}" class="bg-gray-800 text-white py-2 px-4 rounded-md">Back to Categories</a>
+@endsection

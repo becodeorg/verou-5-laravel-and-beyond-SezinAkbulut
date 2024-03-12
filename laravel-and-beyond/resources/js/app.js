@@ -1,10 +1,10 @@
-
+window.$ = window.jQuery = require('jquery');
+require('owl.carousel');
 require('./bootstrap');
+require('owl.carousel/dist/assets/owl.carousel.min.css');
 
-// app.js
 
-// app.js
-
+//toggle
 document.addEventListener('DOMContentLoaded', function () {
     const toggleModeButton = document.getElementById('toggle-mode');
     const headerImage = document.getElementById('header-image');
@@ -31,6 +31,41 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     }
 });
+
+
+
+
+
+//home page carousel for popular trend products
+$(document).ready(function () {
+    $(".owl-carousel").owlCarousel({
+        items: 3,
+        loop: true,
+        nav: true,
+        margin: 20,
+        responsive: {
+            0: {items: 1},
+            600: {items: 2},
+            1000: {items: 3},
+        }
+    });
+});
+
+
+
+
+//scroll down arrow
+document.getElementById('scrollDown').addEventListener('click', function (event) {
+    event.preventDefault();
+
+    // Replace 'popularTrends' with the ID of the "Popular Trends" section
+    const targetElement = document.getElementById('popularTrends');
+
+    if (targetElement) {
+        targetElement.scrollIntoView({behavior: 'smooth'});
+    }
+});
+
 
 
 

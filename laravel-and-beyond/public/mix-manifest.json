@@ -1,4 +1,7 @@
 {
     "/js/app.js": "/js/app.js",
-    "/css/app.css": "/css/app.css"
+    "/css/app.css": "/css/app.css",
+    "/js/jquery.min.js": "/js/jquery.min.js",
+    "/js/owl.carousel.min.js": "/js/owl.carousel.min.js",
+    "/css/owl.carousel.min.css": "/css/owl.carousel.min.css"
 }
